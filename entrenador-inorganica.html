@@ -127,10 +127,15 @@ const Q=(q,a,show,h,e)=>({k:'Q',q,a,show,h,e}), T=(q,a,show,h,e)=>({k:'T',q,a,sh
 const NB='Vale Stock (números romanos) o prefijos multiplicadores';
 const MODS=[
 {n:'Números de oxidación',sym:'+ / −',mh:215,neutral:true,norma:'Responde con los números, por ejemplo +2 y +3',
- rule:['Grupo 1: +1. Grupo 2: +2. Grupo 13 (B, Al…): +3. Cinc: +2. Plata: +1.',
- 'Los metales de la zona central casi siempre tienen varios números: hierro +2 y +3; cobre +1 y +2; oro +1 y +3; mercurio +1 y +2; platino y paladio +2 y +4.',
- 'Halógenos (Cl, Br, I): +1, +3, +5, +7. Anfígenos (S, Se, Te): +2, +4, +6. Nitrógeno: de +1 a +5; forman ácidos los impares.',
- 'El hidrógeno es +1, salvo en los hidruros metálicos, donde es −1. El oxígeno es −2, y −1 en los peróxidos.'],
+ rule:['Grupo 1 (Li, Na, K, Rb, Cs): +1. Grupo 2 (Be, Mg, Ca, Sr, Ba): +2.',
+ 'Grupo 13: boro, aluminio, galio e indio: +3. El talio es la excepción del grupo: +1 y +3.',
+ 'Grupo 14: carbono +2 y +4; silicio solo +4; germanio, estaño y plomo: +2 y +4.',
+ 'Grupo 15: nitrógeno, fósforo, arsénico y antimonio actúan con −3 como no metales; en positivo, nitrógeno de +1 a +5, fósforo/arsénico/antimonio con +1(solo P), +3 y +5, y bismuto solo +3 y +5.',
+ 'Grupo 16: oxígeno −2 (−1 en los peróxidos); azufre, selenio y teluro: −2, +2, +4 y +6.',
+ 'Grupo 17: el flúor solo actúa con −1; cloro, bromo y yodo: −1, +1, +3, +5 y +7.',
+ 'El hidrógeno es +1, salvo en los hidruros metálicos, donde es −1.',
+ 'Metales de transición con varios números: titanio +2, +3 y +4; vanadio de +2 a +5; cromo +2, +3 y +6; manganeso +2, +3, +4, +6 y +7; hierro, cobalto y níquel: +2 y +3; cobre +1 y +2; oro +1 y +3; mercurio +1 y +2; platino y paladio +2 y +4.',
+ 'Metales de transición con un único número: cinc y cadmio +2; plata +1.'],
  items:[
  Q('¿Con qué números de oxidación positivos actúa el hierro?',[2,3],'+2 y +3','El hierro es un metal de transición: tiene más de un número. Piensa en Fe(II) y Fe(III).','Hierro: +2 y +3. Por eso hay que indicarlo: óxido de hierro(II) y óxido de hierro(III).'),
  Q('¿Cuál es el único número de oxidación del aluminio?',[3],'+3','Está en el grupo 13 (boroideos).','Los elementos del grupo 13 solo actúan con +3, así que no lleva número romano: óxido de aluminio.'),
@@ -273,7 +278,25 @@ MODS[0].items.push(
  Q('¿Cuál es el único número de oxidación del cinc?',[2],'+2','Es del grupo 12 y no se comporta como su vecino el mercurio.','Cinc: solo +2, así que no lleva número romano (óxido de cinc).'),
  Q('¿Con qué número de oxidación actúa el oxígeno en el H2O2?',[-1],'−1','En los peróxidos el oxígeno no tiene su valor habitual (−2). Fíjate en el signo.','En los peróxidos, cada oxígeno es −1 (el grupo O2 vale −2).'),
  Q('¿Con qué número de oxidación negativo actúa el fósforo?',[-3],'−3','Los elementos del grupo 15 comparten el mismo número negativo.','N, P, As y Sb actúan con −3 en fosfuros, nitruros, etc.'),
- Q('¿Con qué números de oxidación positivos actúa el carbono?',[2,4],'+2 y +4','Los carbonoideos solo tienen dos números positivos (el silicio solo uno).','C: +2 y +4 (CO y CO2). El silicio solo tiene +4.')
+ Q('¿Con qué números de oxidación positivos actúa el carbono?',[2,4],'+2 y +4','Los carbonoideos solo tienen dos números positivos (el silicio solo uno).','C: +2 y +4 (CO y CO2). El silicio solo tiene +4.'),
+ Q('¿Qué número de oxidación tienen los metales alcalinos, como el sodio o el potasio?',[1],'+1','Solo tienen un electrón de más en su última capa.','Grupo 1: Li, Na, K, Rb y Cs actúan siempre con +1.'),
+ Q('¿Qué número de oxidación tienen los metales alcalinotérreos, como el calcio o el magnesio?',[2],'+2','Piensa en cuántos electrones de más tienen en su última capa.','Grupo 2: Be, Mg, Ca, Sr y Ba actúan siempre con +2.'),
+ Q('¿Qué número de oxidación tienen el boro, el galio y el indio?',[3],'+3','Son del mismo grupo que el aluminio.','Grupo 13 (salvo el talio): B, Al, Ga e In actúan con +3.'),
+ Q('¿Con qué números de oxidación actúa el talio?',[1,3],'+1 y +3','Es del grupo 13, pero no se comporta como el resto del grupo.','El talio es la excepción del grupo 13: +1 y +3.'),
+ Q('¿Cuál es el único número de oxidación del silicio?',[4],'+4','Es del mismo grupo que el carbono, pero solo tiene un número.','Si: solo +4, a diferencia del carbono, que también tiene +2.'),
+ Q('¿Con qué números de oxidación actúan el germanio, el estaño y el plomo?',[2,4],'+2 y +4','Son del grupo del carbono y el silicio, pero estos sí tienen dos números.','Ge, Sn y Pb: +2 y +4.'),
+ Q('¿Con qué números de oxidación positivos actúa el fósforo?',[1,3,5],'+1, +3 y +5','Da tres oxoácidos: hipofosforoso, fosforoso y fosfórico.','P: +1, +3 y +5 (además de −3 como no metal). Forma H3PO2, H3PO3 y H3PO4.'),
+ Q('¿Con qué números de oxidación positivos actúan el arsénico y el antimonio?',[3,5],'+3 y +5','Son del mismo grupo que el fósforo, pero con menos números positivos.','As y Sb: +3 y +5 (además de −3 como no metales).'),
+ Q('¿Con qué números de oxidación actúa el bismuto?',[3,5],'+3 y +5','Está en el mismo grupo que el nitrógeno y el fósforo.','Bi: +3 y +5.'),
+ Q('¿Con qué número de oxidación actúa siempre el flúor?',[-1],'−1','A diferencia del resto de halógenos, no forma ácidos con oxígeno.','El flúor es el más electronegativo de todos: solo actúa con −1, nunca en positivo.'),
+ Q('¿Cuál es el único número de oxidación de la plata?',[1],'+1','Es un metal de transición, pero solo tiene un número, como el cinc.','Ag: solo +1, así que no lleva número romano: óxido de plata.'),
+ Q('¿Cuál es el único número de oxidación del cadmio?',[2],'+2','Está en el mismo grupo que el cinc.','Cd: solo +2, como el cinc.'),
+ Q('¿Con qué números de oxidación actúa el cromo?',[2,3,6],'+2, +3 y +6','Con +6 forma los oxoácidos crómico y dicrómico.','Cr: +2, +3 y +6 (H2CrO4 crómico, H2Cr2O7 dicrómico).'),
+ Q('¿Con qué números de oxidación actúa el manganeso?',[2,3,4,6,7],'+2, +3, +4, +6 y +7','Con +6 y +7 forma los oxoácidos mangánico y permangánico.','Mn: +2, +3, +4, +6 y +7 (H2MnO4 mangánico, HMnO4 permangánico).'),
+ Q('¿Con qué números de oxidación actúa el cobalto?',[2,3],'+2 y +3','Está junto al hierro y al níquel en la tabla.','Co: +2 y +3.'),
+ Q('¿Con qué números de oxidación actúa el níquel?',[2,3],'+2 y +3','Está junto al cobalto en la tabla.','Ni: +2 y +3.'),
+ Q('¿Con qué números de oxidación actúa el titanio?',[2,3,4],'+2, +3 y +4','Es uno de los primeros metales de transición.','Ti: +2, +3 y +4.'),
+ Q('¿Con qué números de oxidación actúa el vanadio?',[2,3,4,5],'de +2 a +5','Tiene cuatro números seguidos, empezando en +2.','V: +2, +3, +4 y +5.')
 );
 MODS[1].items.push(
  N('N2O3',['óxido de nitrógeno(III)','trióxido de dinitrógeno'],'Tres O suman −6, repartidos entre dos N: ¿cuánto vale cada nitrógeno?','3 × (−2) = −6, luego cada N es +3: óxido de nitrógeno(III) o trióxido de dinitrógeno.'),
