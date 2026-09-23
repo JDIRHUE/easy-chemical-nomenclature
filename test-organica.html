@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test de formulación orgánica · 2º Bachillerato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;0,7..72,600;0,7..72,700;1,7..72,500&family=Work+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  --paper:#F1F3EC; --paper-strong:#E8EBE1; --paper-line:#D7DCCC;
+  --ink:#182534; --ink-soft:#4C5A5A; --ink-faint:#7C877F;
+  --bond:#2B6E6B; --bond-strong:#1F4F4D;
+  --accent:#B8791E; --accent-soft:#F3E3C4;
+  --good:#3E7D48; --good-soft:#DCEEDC;
+  --bad:#AC4335; --bad-soft:#F6DFD9;
+  --card:#FFFFFF; --card-border:#E1E4D8;
+  --shadow:0 1px 2px rgba(24,37,52,.06);
+  --radius-card:14px; --radius-pill:999px;
+  color-scheme: light;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --paper:#141A18; --paper-strong:#1A2220; --paper-line:#26302B;
+    --ink:#ECEFE7; --ink-soft:#B7C2B9; --ink-faint:#8B978C;
+    --bond:#6FBDB6; --bond-strong:#8FD6CE;
+    --accent:#E0A94C; --accent-soft:#3B2F16;
+    --good:#7BCB86; --good-soft:#1E3222;
+    --bad:#E38677; --bad-soft:#3A211D;
+    --card:#1B2220; --card-border:#2A332E;
+    --shadow:0 1px 3px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#141A18; --paper-strong:#1A2220; --paper-line:#26302B;
+  --ink:#ECEFE7; --ink-soft:#B7C2B9; --ink-faint:#8B978C;
+  --bond:#6FBDB6; --bond-strong:#8FD6CE;
+  --accent:#E0A94C; --accent-soft:#3B2F16;
+  --good:#7BCB86; --good-soft:#1E3222;
+  --bad:#E38677; --bad-soft:#3A211D;
+  --card:#1B2220; --card-border:#2A332E;
+  --shadow:0 1px 3px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background: linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 34px, var(--paper);
+  color:var(--ink);
+  font-family:"Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size:16.5px; line-height:1.55;
+}
+@media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+h1,h2,h3{font-family:"Literata", Georgia, serif; color:var(--ink); margin:0 0 .4em; line-height:1.2;}
+h2{font-size:1.4rem; font-weight:600;}
+h3{font-size:1.05rem; font-weight:600;}
+p{margin:0 0 .8em;}
+.mono,.rformula{font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;}
+sub{font-size:.72em;}
+.bond{color:var(--bond); font-weight:600; padding:0 1px;}
+.bond2{color:var(--bond-strong); font-weight:700;}
+.bond3{color:var(--bond-strong); font-weight:800;}
+.grp{color:var(--accent); font-weight:700; border-bottom:2px solid var(--accent-soft); padding-bottom:1px;}
+.ring-svg text{font-family:"JetBrains Mono", monospace; fill:var(--ink);}
+.ring-svg .edge{stroke:var(--bond); stroke-width:2.4;}
+.ring-svg .subline{stroke:var(--ink-soft); stroke-width:2;}
+.ring-svg .exo{stroke:var(--accent); stroke-width:2.4;}
+.ring-svg .sublabel{fill:var(--ink);}
+.ring-svg .sublabel.grp{fill:var(--accent); font-weight:700;}
+.wrap{max-width:880px; margin:0 auto; padding:0 20px;}
+header.site{padding: calc(18px + env(safe-area-inset-top,0px)) 0 14px; border-bottom:1px solid var(--paper-line); background:var(--paper-strong);}
+.header-row{display:flex; align-items:flex-start; justify-content:space-between; gap:16px;}
+.site h1{font-size:1.4rem; font-weight:700;}
+.site .tagline{color:var(--ink-soft); font-size:.95rem; max-width:60ch;}
+.eyebrow{font-family:"JetBrains Mono", monospace; font-size:.72rem; color:var(--ink-faint); letter-spacing:.02em;}
+.theme-btn{border:1px solid var(--card-border); background:var(--card); color:var(--ink); border-radius:var(--radius-pill); padding:8px 12px; font-size:.85rem; cursor:pointer; font-family:inherit; white-space:nowrap; flex:none;}
+main{padding:30px 0 90px;}
+.card{background:var(--card); border:1px solid var(--card-border); border-radius:var(--radius-card); padding:20px 22px; box-shadow:var(--shadow);}
+.card + .card{margin-top:14px;}
+.btn{font-family:inherit; font-size:.92rem; font-weight:600; padding:10px 16px; border-radius:var(--radius-pill); border:1px solid var(--bond); background:var(--bond); color:#fff; cursor:pointer; display:inline-flex; align-items:center; gap:6px;}
+.btn.ghost{background:transparent; color:var(--bond-strong);}
+.btn.subtle{background:var(--paper); color:var(--ink); border-color:var(--card-border);}
+.btn:hover{filter:brightness(1.06);}
+.btn:disabled{opacity:.5; cursor:default;}
+.field-row{display:flex; flex-wrap:wrap; gap:22px; margin:14px 0;}
+.field{min-width:180px;}
+.field label{display:block; font-size:.82rem; color:var(--ink-soft); margin-bottom:5px; font-weight:600;}
+select, input[type="text"]{
+  font-family:inherit; font-size:.95rem; padding:8px 10px; border-radius:8px; border:1px solid var(--card-border);
+  background:var(--paper); color:var(--ink); width:100%;
+}
+.blocks-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:8px; margin-top:8px;}
+.blocks-grid label{display:flex; align-items:center; gap:7px; font-size:.88rem; background:var(--paper); border:1px solid var(--card-border); border-radius:8px; padding:7px 10px; cursor:pointer;}
+.blocks-grid input{accent-color:var(--bond);}
+.radio-row{display:flex; gap:14px; flex-wrap:wrap; margin-top:6px;}
+.radio-row label{display:flex; align-items:center; gap:6px; font-size:.9rem; cursor:pointer;}
+.fam-toggle{font-size:.78rem; color:var(--bond-strong); cursor:pointer; text-decoration:underline; background:none; border:none; padding:0; font-family:inherit;}
+
+.testhead{display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px; margin-bottom:6px;}
+.testcode{font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--ink-faint);}
+.part-title{margin-top:26px; padding-bottom:6px; border-bottom:2px solid var(--paper-line);}
+.exercise{display:grid; grid-template-columns:2.4em 1fr; gap:12px; padding:14px 0; border-bottom:1px solid var(--paper-line); align-items:start;}
+.exercise:last-child{border-bottom:none;}
+.exnum{font-family:"JetBrains Mono",monospace; color:var(--ink-faint); font-size:.9rem; padding-top:6px;}
+.exq .rformula{font-size:1.08rem;}
+.exq .ring-svg{max-width:130px;}
+.exq .name-prompt{font-family:"Literata",serif; font-weight:600; color:var(--bond-strong); font-size:1.02rem;}
+.ex-input{margin-top:8px; display:flex; align-items:center; gap:8px; flex-wrap:wrap;}
+.ex-input input[type="text"]{max-width:340px;}
+.ex-fb{font-size:.85rem; padding:3px 9px; border-radius:var(--radius-pill); display:none;}
+.ex-fb.good{display:inline-block; background:var(--good-soft); color:var(--good);}
+.ex-fb.bad{display:inline-block; background:var(--bad-soft); color:var(--bad);}
+.reveal{margin-top:8px; font-size:.92rem; color:var(--ink-soft); display:none; padding:8px 10px; background:var(--accent-soft); border-radius:8px;}
+.reveal.show{display:block;}
+.reveal b{color:var(--accent);}
+.linklike{background:none; border:none; color:var(--bond-strong); text-decoration:underline; cursor:pointer; font-family:inherit; font-size:.85rem; padding:0;}
+
+.score-banner{display:none; margin:18px 0; padding:14px 18px; border-radius:12px; background:var(--good-soft); color:var(--good); font-weight:600;}
+.score-banner.show{display:block;}
+
+.toolbar{
+  position:sticky; bottom:0; left:0; right:0; background:var(--paper-strong); border-top:1px solid var(--paper-line);
+  padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px)); margin-top:20px;
+}
+.toolbar .wrap{display:flex; gap:10px; flex-wrap:wrap; justify-content:center;}
+
+#configPanel.hidden, #testArea.hidden, .toolbar.hidden{display:none;}
+
+.print-only{display:none;}
+@media print{
+  header.site, .toolbar, .no-print, .theme-btn{display:none !important;}
+  body{background:#fff; font-size:12.5pt;}
+  .card{box-shadow:none; border:1px solid #ccc;}
+  .print-only{display:block;}
+  a{color:inherit; text-decoration:none;}
+}
+footer{padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px)); text-align:center; color:var(--ink-faint); font-size:.82rem;}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap header-row">
+    <div>
+      <span class="eyebrow">Profe Juanjo Virtual</span>
+      <h1>Test de formulación orgánica</h1>
+      <p class="tagline">2º de Bachillerato · genera un test con corrección para practicar antes del examen.</p>
+    </div>
+    <button class="theme-btn no-print" id="themeBtn" type="button">🌓 Tema</button>
+  </div>
+</header>
+<main class="wrap">
+  <div id="content"></div>
+</main>
+<footer class="no-print">Química, 2º de Bachillerato · nomenclatura IUPAC con nombres tradicionales aceptados donde se indica</footer>
+<script>
+/* ===== BANCO DE COMPUESTOS =====
+   bloque|fórmula|nombre principal|otros nombres válidos (;)|grupos (solo polifuncionales)
+   Las fórmulas que empiezan por @ son anillos: @n [a] [dK] [vK=etiqueta] [wK=etiqueta]  */
+const RAW = `
+alcanos|CH4|metano
+alcanos|CH3-CH3|etano
+alcanos|CH3-CH2-CH3|propano
+alcanos|CH3-CH2-CH2-CH3|butano
+alcanos|CH3-(CH2)3-CH3|pentano
+alcanos|CH3-(CH2)4-CH3|hexano
+alcanos|CH3-(CH2)5-CH3|heptano
+alcanos|CH3-(CH2)6-CH3|octano
+alcanos|CH3-(CH2)7-CH3|nonano
+alcanos|CH3-(CH2)8-CH3|decano
+alcanos|CH3-CH(CH3)-CH3|2-metilpropano|metilpropano
+alcanos|CH3-CH(CH3)-CH2-CH3|2-metilbutano|metilbutano
+alcanos|CH3-C(CH3)2-CH3|2,2-dimetilpropano|dimetilpropano
+alcanos|CH3-CH(CH3)-CH2-CH2-CH3|2-metilpentano
+alcanos|CH3-CH2-CH(CH3)-CH2-CH3|3-metilpentano
+alcanos|CH3-CH(CH3)-CH(CH3)-CH3|2,3-dimetilbutano
+alcanos|CH3-C(CH3)2-CH2-CH3|2,2-dimetilbutano
+alcanos|CH3-CH(CH3)-CH(CH3)-CH2-CH3|2,3-dimetilpentano
+alcanos|CH3-CH(CH3)-CH2-CH(CH3)-CH3|2,4-dimetilpentano
+alcanos|CH3-C(CH3)2-CH2-CH(CH3)-CH3|2,2,4-trimetilpentano
+alcanos|CH3-CH(CH3)-CH(CH3)-CH(CH3)-CH3|2,3,4-trimetilpentano
+alcanos|CH3-CH2-CH(CH2-CH3)-CH2-CH3|3-etilpentano
+alcanos|CH3-CH2-CH(CH2-CH2-CH3)-CH2-CH3|3-etilhexano
+alcanos|CH3-CH(CH3)-CH(CH2-CH3)-CH2-CH3|3-etil-2-metilpentano
+alcanos|CH3-CH(CH3)-CH(CH2-CH3)-CH2-CH2-CH3|3-etil-2-metilhexano
+alcanos|CH3-CH(CH3)-CH(CH3)-CH(CH2-CH3)-CH2-CH3|4-etil-2,3-dimetilhexano
+alcanos|CH3-CH(CH3)-CH(CH2-CH3)-CH2-CH2-CH2-CH3|3-etil-2-metilheptano
+alcanos|CH3-CH2-CH2-CH(CH(CH3)-CH3)-CH2-CH2-CH3|4-isopropilheptano|4-(propan-2-il)heptano;4-(1-metiletil)heptano
+alquenos|CH2=CH2|eteno|etileno
+alquenos|CH2=CH-CH3|propeno
+alquenos|CH2=CH-CH2-CH3|but-1-eno|1-buteno
+alquenos|CH3-CH=CH-CH3|but-2-eno|2-buteno
+alquenos|CH2=C(CH3)-CH3|2-metilpropeno|metilpropeno
+alquenos|CH2=CH-CH2-CH2-CH3|pent-1-eno|1-penteno
+alquenos|CH3-CH=CH-CH2-CH3|pent-2-eno|2-penteno
+alquenos|CH2=C(CH3)-CH2-CH3|2-metilbut-1-eno|2-metil-1-buteno
+alquenos|CH3-C(CH3)=CH-CH3|2-metilbut-2-eno|2-metil-2-buteno
+alquenos|CH2=CH-CH(CH3)-CH3|3-metilbut-1-eno|3-metil-1-buteno
+alquenos|CH2=CH-CH2-CH(CH3)-CH3|4-metilpent-1-eno|4-metil-1-penteno
+alquenos|CH3-CH=C(CH3)-CH2-CH3|3-metilpent-2-eno|3-metil-2-penteno
+alquenos|CH3-CH=CH-CH2-CH2-CH3|hex-2-eno|2-hexeno
+alquenos|CH3-CH2-CH=CH-CH2-CH3|hex-3-eno|3-hexeno
+alquenos|CH2=C=CH2|propadieno|propa-1,2-dieno;1,2-propadieno;aleno
+alquenos|CH2=CH-CH=CH2|buta-1,3-dieno|1,3-butadieno
+alquenos|CH2=CH-CH2-CH=CH2|penta-1,4-dieno|1,4-pentadieno
+alquenos|CH3-CH=CH-CH=CH2|penta-1,3-dieno|1,3-pentadieno
+alquenos|CH2=CH-CH2-CH=CH-CH3|hexa-1,4-dieno|1,4-hexadieno
+alquenos|CH2=C(CH3)-CH=CH2|2-metilbuta-1,3-dieno|2-metil-1,3-butadieno;isopreno
+alquinos|CH≡CH|etino|acetileno
+alquinos|CH≡C-CH3|propino
+alquinos|CH≡C-CH2-CH3|but-1-ino|1-butino
+alquinos|CH3-C≡C-CH3|but-2-ino|2-butino
+alquinos|CH≡C-CH2-CH2-CH3|pent-1-ino|1-pentino
+alquinos|CH3-C≡C-CH2-CH3|pent-2-ino|2-pentino
+alquinos|CH3-C≡C-CH2-CH2-CH3|hex-2-ino|2-hexino
+alquinos|CH≡C-CH(CH3)-CH3|3-metilbut-1-ino|3-metil-1-butino
+alquinos|CH3-C≡C-CH(CH3)-CH2-CH3|4-metilhex-2-ino|4-metil-2-hexino
+alquinos|CH≡C-CH(CH3)-CH2-C(CH3)2-CH3|3,5,5-trimetilhex-1-ino|3,5,5-trimetil-1-hexino
+alquinos|CH≡C-CH2-C≡CH|penta-1,4-diino|1,4-pentadiino
+alquinos|CH≡C-C≡C-CH3|penta-1,3-diino|1,3-pentadiino
+alquinos|CH2=CH-C≡CH|but-1-en-3-ino|1-buten-3-ino
+alquinos|CH2=CH-CH2-C≡CH|pent-1-en-4-ino|1-penten-4-ino
+alquinos|CH3-CH=CH-C≡CH|pent-3-en-1-ino|3-penten-1-ino
+alquinos|CH≡C-CH=CH-CH(CH3)-CH3|5-metilhex-3-en-1-ino|5-metil-3-hexen-1-ino
+alquinos|CH3-CH=CH-CH2-C≡C-CH3|hept-2-en-5-ino|2-hepten-5-ino
+ciclicos|@3|ciclopropano
+ciclicos|@4|ciclobutano
+ciclicos|@5|ciclopentano
+ciclicos|@6|ciclohexano
+ciclicos|@5 v0=CH3|metilciclopentano
+ciclicos|@6 v0=CH3|metilciclohexano
+ciclicos|@4 v0=CH2CH3|etilciclobutano
+ciclicos|@6 v0=CH3 v1=CH3|1,2-dimetilciclohexano
+ciclicos|@5 v0=CH3 v2=CH3|1,3-dimetilciclopentano
+ciclicos|@6 v0=CH3 v0=CH3|1,1-dimetilciclohexano
+ciclicos|@4 v0=CH2CH3 v1=CH3|1-etil-2-metilciclobutano
+ciclicos|@6 v0=CH3 v1=CH3 v3=CH3|1,2,4-trimetilciclohexano
+ciclicos|@4 d0|ciclobuteno
+ciclicos|@5 d0|ciclopenteno
+ciclicos|@6 d0|ciclohexeno
+ciclicos|@5 d0 v2=CH3|3-metilciclopenteno
+ciclicos|@6 d0 d2|ciclohexa-1,3-dieno|1,3-ciclohexadieno
+ciclicos|@6 d0 d3|ciclohexa-1,4-dieno|1,4-ciclohexadieno
+aromaticos|@6 a|benceno
+aromaticos|@6 a v0=CH3|metilbenceno|tolueno
+aromaticos|@6 a v0=CH2CH3|etilbenceno
+aromaticos|@6 a v0=CH(CH3)2|isopropilbenceno|(propan-2-il)benceno;cumeno
+aromaticos|@6 a v0=CH=CH2|etenilbenceno|vinilbenceno;estireno
+aromaticos|@6 a v0=CH3 v1=CH3|1,2-dimetilbenceno|o-dimetilbenceno;orto-dimetilbenceno;o-xileno
+aromaticos|@6 a v0=CH3 v2=CH3|1,3-dimetilbenceno|m-dimetilbenceno;meta-dimetilbenceno;m-xileno
+aromaticos|@6 a v0=CH3 v3=CH3|1,4-dimetilbenceno|p-dimetilbenceno;para-dimetilbenceno;p-xileno
+aromaticos|@6 a v0=CH2CH3 v2=CH3|1-etil-3-metilbenceno|m-etilmetilbenceno
+aromaticos|@6 a v0=CH2CH3 v3=CH3|1-etil-4-metilbenceno|p-etilmetilbenceno
+aromaticos|@6 a v0=CH3 v1=CH3 v3=CH3|1,2,4-trimetilbenceno
+aromaticos|@6 a v0=Br v1=Br v3=CH3|1,2-dibromo-4-metilbenceno
+aromaticos|@6 a v0=Br v1=CH3|1-bromo-2-metilbenceno|o-bromometilbenceno;2-bromotolueno;o-bromotolueno
+aromaticos|@6 a v0=CH3 v1=NO2|1-metil-2-nitrobenceno|o-nitrometilbenceno;2-nitrotolueno;o-nitrotolueno
+aromaticos|CH3-CH(CH3)-CH2-CH(C6H5)-CH2-CH3|4-fenil-2-metilhexano
+halogenados|CH3-Cl|clorometano|cloruro de metilo
+halogenados|CH3-I|yodometano|yoduro de metilo
+halogenados|CH2Cl2|diclorometano
+halogenados|CHCl3|triclorometano|cloroformo
+halogenados|CHI3|triyodometano|yodoformo
+halogenados|CCl4|tetraclorometano
+halogenados|CCl2F2|diclorodifluorometano
+halogenados|CH3-CH2-Cl|cloroetano|cloruro de etilo
+halogenados|CH3-CH2-Br|bromoetano|bromuro de etilo
+halogenados|CH3-CH2-CH2-CH2F|1-fluorobutano|fluoruro de butilo
+halogenados|CH3-CH2-CH2-Cl|1-cloropropano|cloruro de propilo
+halogenados|CH3-CHCl-CH3|2-cloropropano|cloruro de isopropilo
+halogenados|CH3-CHBr-CH2-CH3|2-bromobutano|bromuro de sec-butilo
+halogenados|CH3-CBr(CH3)-CH3|2-bromo-2-metilpropano|bromuro de terc-butilo
+halogenados|CH2Br-CH2Br|1,2-dibromoetano
+halogenados|CH2Br-CHBr-CH3|1,2-dibromopropano
+halogenados|CH3-CCl3|1,1,1-tricloroetano
+halogenados|CH2=CHCl|cloroeteno|cloruro de vinilo
+halogenados|CCl2=CCl2|tetracloroeteno
+halogenados|CH2=CCl-CCl=CH2|2,3-diclorobuta-1,3-dieno|2,3-dicloro-1,3-butadieno
+halogenados|CH3-CH=CH-CH2Br|1-bromobut-2-eno|1-bromo-2-buteno
+halogenados|CH3-CHCl-CHBr-CH2-CH3|3-bromo-2-cloropentano
+halogenados|CH3-C(CH3)F-CHBr-CH3|3-bromo-2-fluoro-2-metilbutano
+halogenados|CH3-CH(CH3)-CH2-CHCl-CH2-CH3|4-cloro-2-metilhexano
+halogenados|CH3-CH=CF-CH(CH2-CH3)-CH2-CH3|4-etil-3-fluorohex-2-eno|4-etil-3-fluoro-2-hexeno
+halogenados|@6 v0=Cl|clorociclohexano
+halogenados|@5 v0=Br v1=Br|1,2-dibromociclopentano
+halogenados|@5 v0=Cl v0=Cl v2=CH3|1,1-dicloro-3-metilciclopentano
+halogenados|@6 d0 v3=Br|4-bromociclohexeno
+halogenados|@6 a v0=Cl|clorobenceno
+halogenados|@6 a v0=Br|bromobenceno
+alcoholes|CH3-OH|metanol|alcohol metílico
+alcoholes|CH3-CH2-OH|etanol|alcohol etílico
+alcoholes|CH3-CH2-CH2-OH|propan-1-ol|1-propanol;alcohol propílico
+alcoholes|CH3-CHOH-CH3|propan-2-ol|2-propanol;alcohol isopropílico
+alcoholes|CH3-CH2-CH2-CH2-OH|butan-1-ol|1-butanol
+alcoholes|CH3-CH2-CHOH-CH3|butan-2-ol|2-butanol
+alcoholes|CH3-CH(CH3)-CH2-OH|2-metilpropan-1-ol|2-metil-1-propanol
+alcoholes|CH3-C(OH)(CH3)-CH3|2-metilpropan-2-ol|2-metil-2-propanol;metilpropan-2-ol
+alcoholes|CH3-CH2-CH2-CH2-CH2-OH|pentan-1-ol|1-pentanol
+alcoholes|CH3-CH2-CH2-CHOH-CH3|pentan-2-ol|2-pentanol
+alcoholes|CH3-CH2-CHOH-CH2-CH3|pentan-3-ol|3-pentanol
+alcoholes|CH3-CH(CH3)-CH2-CH2-OH|3-metilbutan-1-ol|3-metil-1-butanol
+alcoholes|CH3-C(OH)(CH3)-CH2-CH3|2-metilbutan-2-ol|2-metil-2-butanol
+alcoholes|CH3-CHOH-CH(CH3)-CH2-C(CH3)2-CH3|3,5,5-trimetilhexan-2-ol|3,5,5-trimetil-2-hexanol
+alcoholes|CH3-CHOH-CH2-CHOH-CH2-CH3|hexano-2,4-diol|2,4-hexanodiol
+alcoholes|CH2OH-CH2OH|etano-1,2-diol|1,2-etanodiol;etilenglicol
+alcoholes|CH2OH-CHOH-CH3|propano-1,2-diol|1,2-propanodiol
+alcoholes|CH2OH-CH2-CH2OH|propano-1,3-diol|1,3-propanodiol
+alcoholes|CH2OH-CHOH-CH2OH|propano-1,2,3-triol|1,2,3-propanotriol;glicerol;glicerina
+alcoholes|CH2=CH-CH2OH|prop-2-en-1-ol|2-propen-1-ol;alcohol alílico
+alcoholes|CH2=CH-CH2-CH2OH|but-3-en-1-ol|3-buten-1-ol
+alcoholes|CH3-CH=CH-CH2OH|but-2-en-1-ol|2-buten-1-ol
+alcoholes|CH2=CH-CHOH-CH3|but-3-en-2-ol|3-buten-2-ol
+alcoholes|CH≡C-CH2-CH2OH|but-3-in-1-ol|3-butin-1-ol
+alcoholes|CH2=CH-CH2-CH2-CH2OH|pent-4-en-1-ol|4-penten-1-ol
+alcoholes|CH3-CH=CH-CH2-CHOH-CH3|hex-4-en-2-ol|4-hexen-2-ol
+alcoholes|CH2=CH-C(OH)(Cl)-CH3|2-clorobut-3-en-2-ol|2-cloro-3-buten-2-ol
+alcoholes|@5 v0=OH|ciclopentanol
+alcoholes|@6 v0=OH|ciclohexanol
+alcoholes|@5 v0=OH v2=CH3|3-metilciclopentanol
+alcoholes|@6 v0=OH v3=OH|ciclohexano-1,4-diol|1,4-ciclohexanodiol
+alcoholes|@6 a v0=OH|fenol|hidroxibenceno
+alcoholes|@6 a v0=OH v1=CH3|2-metilfenol|o-metilfenol;o-cresol
+alcoholes|@6 a v0=OH v2=Cl|3-clorofenol|m-clorofenol
+alcoholes|@6 a v0=OH v1=Br|2-bromofenol|o-bromofenol
+alcoholes|@6 a v0=OH v3=CH3|4-metilfenol|p-metilfenol;p-cresol
+alcoholes|@6 a v0=OH v1=OH|benceno-1,2-diol|1,2-bencenodiol;1,2-dihidroxibenceno;catecol
+eteres|CH3-O-CH3|metoximetano|dimetil éter;éter dimetílico
+eteres|CH3-O-CH2-CH3|metoxietano|etil metil éter;metil etil éter
+eteres|CH3-CH2-O-CH2-CH3|etoxietano|dietil éter;éter dietílico
+eteres|CH3-O-CH2-CH2-CH3|1-metoxipropano|metoxipropano;metil propil éter
+eteres|CH3-O-CH(CH3)-CH3|2-metoxipropano|isopropil metil éter;metil isopropil éter;metoxiisopropano
+eteres|CH3-CH2-O-CH2-CH2-CH3|1-etoxipropano|etoxipropano;etil propil éter
+eteres|CH3-CH2-O-CH(CH3)-CH3|2-etoxipropano|etil isopropil éter;etoxiisopropano
+eteres|CH3-CH2-CH2-CH2-O-CH3|1-metoxibutano|metoxibutano;butil metil éter
+eteres|CH3-O-CH=CH2|metoxieteno|metil vinil éter;etenil metil éter
+eteres|CH3-CH2-O-CH=CH2|etoxieteno|etil vinil éter;etenil etil éter
+eteres|@6 a v0=OCH3|metoxibenceno|fenil metil éter;anisol
+eteres|@6 a v0=OCH2CH3|etoxibenceno|etil fenil éter
+aldehidos|HCHO|metanal|formaldehído;formol
+aldehidos|CH3-CHO|etanal|acetaldehído
+aldehidos|CH3-CH2-CHO|propanal
+aldehidos|CH3-CH2-CH2-CHO|butanal
+aldehidos|CH3-CH2-CH2-CH2-CHO|pentanal
+aldehidos|CH3-CH(CH3)-CHO|2-metilpropanal
+aldehidos|CH3-CH(CH3)-CH2-CHO|3-metilbutanal
+aldehidos|CH2=CH-CHO|propenal|acroleína
+aldehidos|CH3-CH=CH-CHO|but-2-enal|2-butenal
+aldehidos|CH2=CH-CH2-CHO|but-3-enal|3-butenal
+aldehidos|CH3-CH=CH-CH2-CHO|pent-3-enal|3-pentenal
+aldehidos|CH3-C(CH3)=C(Cl)-CHO|2-cloro-3-metilbut-2-enal|2-cloro-3-metil-2-butenal
+aldehidos|CHO-CHO|etanodial
+aldehidos|CHO-CH2-CHO|propanodial
+aldehidos|CHO-CH2-CH2-CHO|butanodial
+aldehidos|CHO-CH2-CH2-CH2-CHO|pentanodial
+aldehidos|CH3-CHBr-CHO|2-bromopropanal
+aldehidos|CH3-CHOH-CHO|2-hidroxipropanal
+aldehidos|@6 a v0=CHO|benzaldehído|bencenocarbaldehído
+aldehidos|@5 v0=CHO|ciclopentanocarbaldehído
+aldehidos|@6 v0=CHO|ciclohexanocarbaldehído
+aldehidos|@6 a v0=CHO v1=CH3 v4=CH3|2,5-dimetilbenzaldehído
+cetonas|CH3-CO-CH3|propanona|acetona;dimetil cetona
+cetonas|CH3-CO-CH2-CH3|butanona|etil metil cetona
+cetonas|CH3-CO-CH2-CH2-CH3|pentan-2-ona|2-pentanona;metil propil cetona
+cetonas|CH3-CH2-CO-CH2-CH3|pentan-3-ona|3-pentanona;dietil cetona
+cetonas|CH3-CO-CH2-CH2-CH2-CH3|hexan-2-ona|2-hexanona
+cetonas|CH3-CH2-CO-CH2-CH2-CH3|hexan-3-ona|3-hexanona
+cetonas|CH3-CO-CH(CH3)-CH3|3-metilbutan-2-ona|3-metil-2-butanona;isopropil metil cetona
+cetonas|CH3-CO-CH2-CH(CH3)-CH3|4-metilpentan-2-ona|4-metil-2-pentanona;isobutil metil cetona
+cetonas|CH2=CH-CO-CH3|but-3-en-2-ona|3-buten-2-ona;butenona
+cetonas|CH2=CH-CH2-CO-CH3|pent-4-en-2-ona|4-penten-2-ona
+cetonas|CH2=CH-CO-CH2-CH2-CH3|hex-1-en-3-ona|1-hexen-3-ona;propil vinil cetona
+cetonas|CH3-CO-CO-CH3|butano-2,3-diona|2,3-butanodiona
+cetonas|CH3-CO-CH2-CO-CH3|pentano-2,4-diona|2,4-pentanodiona
+cetonas|CH3-CO-CH2-CO-CH2-CH3|hexano-2,4-diona|2,4-hexanodiona
+cetonas|@5 w0=O|ciclopentanona
+cetonas|@6 w0=O|ciclohexanona
+cetonas|@6 w0=O d1|ciclohex-2-en-1-ona|ciclohex-2-enona;2-ciclohexenona
+cetonas|@6 a v0=COCH3|fenil metil cetona|acetofenona;1-feniletanona;metil fenil cetona
+acidos|HCOOH|ácido metanoico|ácido fórmico
+acidos|CH3-COOH|ácido etanoico|ácido acético
+acidos|CH3-CH2-COOH|ácido propanoico|ácido propiónico
+acidos|CH3-CH2-CH2-COOH|ácido butanoico|ácido butírico
+acidos|CH3-(CH2)3-COOH|ácido pentanoico
+acidos|CH3-(CH2)4-COOH|ácido hexanoico
+acidos|CH3-CH(CH3)-COOH|ácido 2-metilpropanoico
+acidos|CH3-CH(CH3)-CH2-COOH|ácido 3-metilbutanoico
+acidos|CH2=CH-COOH|ácido propenoico|ácido prop-2-enoico;ácido acrílico
+acidos|CH3-CH=CH-COOH|ácido but-2-enoico|ácido 2-butenoico
+acidos|CH2=CH-CH2-COOH|ácido but-3-enoico|ácido 3-butenoico
+acidos|CH≡C-COOH|ácido propinoico|ácido prop-2-inoico;ácido propiólico
+acidos|CH3-C≡C-COOH|ácido but-2-inoico|ácido 2-butinoico
+acidos|CH3-C≡C-CH(CH3)-COOH|ácido 2-metilpent-3-inoico|ácido 2-metil-3-pentinoico
+acidos|CH2Br-COOH|ácido 2-bromoetanoico|ácido bromoetanoico;ácido bromoacético
+acidos|CH3-CHI-CH2-COOH|ácido 3-yodobutanoico
+acidos|HOOC-COOH|ácido etanodioico|ácido oxálico
+acidos|HOOC-CH2-COOH|ácido propanodioico|ácido malónico
+acidos|HOOC-CH2-CH2-COOH|ácido butanodioico|ácido succínico
+acidos|HOOC-(CH2)4-COOH|ácido hexanodioico|ácido adípico
+acidos|@6 a v0=COOH|ácido benzoico|ácido bencenocarboxílico
+acidos|@6 v0=COOH|ácido ciclohexanocarboxílico
+acidos|@6 v0=COOH v3=CH3|ácido 4-metilciclohexanocarboxílico
+acidos|@6 a v0=COOH v1=Br v4=Br|ácido 2,5-dibromobenzoico
+esteres|HCOO-CH3|metanoato de metilo|formiato de metilo
+esteres|HCOO-CH2-CH3|metanoato de etilo|formiato de etilo
+esteres|CH3-COO-CH3|etanoato de metilo|acetato de metilo
+esteres|CH3-COO-CH2-CH3|etanoato de etilo|acetato de etilo
+esteres|CH3-COO-CH2-CH2-CH3|etanoato de propilo|acetato de propilo
+esteres|CH3-COO-CH(CH3)-CH3|etanoato de isopropilo|acetato de isopropilo;etanoato de propan-2-ilo
+esteres|CH3-CH2-COO-CH3|propanoato de metilo
+esteres|CH3-CH2-COO-CH2-CH3|propanoato de etilo
+esteres|CH3-CH2-CH2-COO-CH3|butanoato de metilo
+esteres|CH3-CH2-CH2-COO-CH2-CH3|butanoato de etilo
+esteres|CH3-COO-CH=CH2|etanoato de etenilo|etanoato de vinilo;acetato de vinilo
+esteres|CH3-CH2-COO-CH=CH2|propanoato de etenilo|propanoato de vinilo
+esteres|CH2=CH-COO-CH3|propenoato de metilo|acrilato de metilo
+esteres|CH3-CH(CH3)-CH2-COO-CH2-CH3|3-metilbutanoato de etilo
+esteres|CH3-COO-CH2-CH2-CH(CH3)-CH3|etanoato de 3-metilbutilo|acetato de 3-metilbutilo;etanoato de isopentilo;acetato de isopentilo
+esteres|CH≡C-CH2-CH2-COO-CH3|pent-4-inoato de metilo|4-pentinoato de metilo
+esteres|CH3-COO-C6H5|etanoato de fenilo|acetato de fenilo
+esteres|CH3-CH2-CH2-COO-C6H5|butanoato de fenilo
+esteres|@6 a v0=COOCH3|benzoato de metilo|bencenocarboxilato de metilo
+esteres|@6 v0=COOCH3|ciclohexanocarboxilato de metilo
+esteres|CH3-COO-Na|etanoato de sodio|acetato de sodio
+esteres|HCOO-K|metanoato de potasio|formiato de potasio
+esteres|(CH3-CH2-COO)2Ca|propanoato de calcio
+aminas|CH3-NH2|metanamina|metilamina
+aminas|CH3-CH2-NH2|etanamina|etilamina
+aminas|CH3-CH2-CH2-NH2|propan-1-amina|1-propanamina;propilamina
+aminas|CH3-CH(NH2)-CH3|propan-2-amina|2-propanamina;isopropilamina
+aminas|CH3-CH2-CH2-CH2-NH2|butan-1-amina|1-butanamina;butilamina
+aminas|CH2=CH-NH2|etenamina|vinilamina
+aminas|CH3-NH-CH3|N-metilmetanamina|dimetilamina
+aminas|CH3-NH-CH2-CH3|N-metiletanamina|N-metiletilamina;etilmetilamina
+aminas|CH3-CH2-NH-CH2-CH3|N-etiletanamina|dietilamina
+aminas|CH3-N(CH3)-CH3|N,N-dimetilmetanamina|trimetilamina
+aminas|CH3-CH2-N(CH3)-CH3|N,N-dimetiletanamina|N,N-dimetiletilamina
+aminas|CH3-N(CH3)-CH2-CH2-CH3|N,N-dimetilpropan-1-amina|N,N-dimetilpropilamina
+aminas|CH3-CH2-N(CH3)-CH2-CH2-CH3|N-etil-N-metilpropan-1-amina|N-etil-N-metilpropilamina
+aminas|NH2-CH2-CH2-NH2|etano-1,2-diamina|1,2-etanodiamina
+aminas|CH3-CH2-CH(NH2)-CH2-NH2|butano-1,2-diamina|1,2-butanodiamina
+aminas|NH2-(CH2)4-NH2|butano-1,4-diamina|1,4-butanodiamina;putrescina
+aminas|NH2-(CH2)5-NH2|pentano-1,5-diamina|1,5-pentanodiamina;cadaverina
+aminas|CH3-CH(NH2)-CH(CH3)-CH2-CHCl-CH3|5-cloro-3-metilhexan-2-amina|5-cloro-3-metil-2-hexanamina
+aminas|@5 v0=NH2|ciclopentanamina|ciclopentilamina
+aminas|@6 v0=NH2 v2=F|3-fluorociclohexanamina
+aminas|@6 a v0=NH2|bencenamina|fenilamina;anilina
+aminas|@6 a v0=NH2 v3=CH3|4-metilbencenamina|4-metilanilina;p-metilanilina;p-toluidina
+amidas|HCONH2|metanamida|formamida
+amidas|CH3-CONH2|etanamida|acetamida
+amidas|CH3-CH2-CONH2|propanamida
+amidas|CH3-CH2-CH2-CONH2|butanamida
+amidas|CH3-CH(CH3)-CH2-CONH2|3-metilbutanamida
+amidas|CH3-CONH-CH3|N-metiletanamida|N-metilacetamida
+amidas|CH3-CH2-CONH-CH3|N-metilpropanamida
+amidas|CH3-CON(CH3)2|N,N-dimetiletanamida|N,N-dimetilacetamida
+amidas|CH3-CON(CH2-CH3)2|N,N-dietiletanamida|N,N-dietilacetamida
+amidas|HCON(CH3)2|N,N-dimetilmetanamida|N,N-dimetilformamida;dimetilformamida
+amidas|CONH2-CONH2|etanodiamida
+amidas|CONH2-CH2-CONH2|propanodiamida
+amidas|@6 a v0=CONH2|benzamida|bencenocarboxamida
+amidas|@6 v0=CONH2|ciclohexanocarboxamida
+nitrilos|CH3-CN|etanonitrilo|acetonitrilo;cianuro de metilo
+nitrilos|CH3-CH2-CN|propanonitrilo|cianuro de etilo
+nitrilos|CH3-CH2-CH2-CN|butanonitrilo|cianuro de propilo
+nitrilos|CH3-(CH2)3-CN|pentanonitrilo|cianuro de butilo
+nitrilos|CH3-CH(CH3)-CN|2-metilpropanonitrilo|cianuro de isopropilo
+nitrilos|CH3-CH(CH3)-CH2-CN|3-metilbutanonitrilo
+nitrilos|CH2=CH-CN|propenonitrilo|acrilonitrilo
+nitrilos|NC-CH2-CH2-CN|butanodinitrilo
+nitrilos|@6 a v0=CN|benzonitrilo|bencenocarbonitrilo;cianuro de fenilo
+nitrilos|@6 v0=CN|ciclohexanocarbonitrilo|cianuro de ciclohexilo
+nitrilos|@5 v0=CN|ciclopentanocarbonitrilo|cianuro de ciclopentilo
+nitroderivados|CH3-NO2|nitrometano
+nitroderivados|CH3-CH2-NO2|nitroetano
+nitroderivados|CH3-CH2-CH2-NO2|1-nitropropano
+nitroderivados|CH3-CH(NO2)-CH3|2-nitropropano
+nitroderivados|CH3-CH2-CH2-CH2-NO2|1-nitrobutano
+nitroderivados|CH3-CH2-CH(NO2)-CH3|2-nitrobutano
+nitroderivados|CH≡C-CH(NO2)-CH3|3-nitrobut-1-ino|3-nitro-1-butino
+nitroderivados|@4 v0=NO2|nitrociclobutano
+nitroderivados|@6 v0=NO2 v2=NO2|1,3-dinitrociclohexano
+nitroderivados|@6 a v0=NO2|nitrobenceno
+nitroderivados|@6 a v0=NO2 v2=NO2|1,3-dinitrobenceno|m-dinitrobenceno
+nitroderivados|@6 a v0=Cl v2=NO2|1-cloro-3-nitrobenceno|m-cloronitrobenceno
+polifuncionales|CH3-CHOH-COOH|ácido 2-hidroxipropanoico|ácido láctico|alcohol,cooh
+polifuncionales|CH3-CHOH-CH2-COOH|ácido 3-hidroxibutanoico||alcohol,cooh
+polifuncionales|HO-CH2-CH2-COOH|ácido 3-hidroxipropanoico||alcohol,cooh
+polifuncionales|CH3-CH(OH)-CH2-CH=C(CH3)-COOH|ácido 5-hidroxi-2-metilhex-2-enoico|ácido 5-hidroxi-2-metil-2-hexenoico|alcohol,cooh
+polifuncionales|HOOC-CH2-CHOH-CH2-COOH|ácido 3-hidroxipentanodioico||alcohol,cooh
+polifuncionales|NH2-CH2-COOH|ácido 2-aminoetanoico|ácido aminoetanoico;ácido aminoacético;glicina|amina,cooh
+polifuncionales|CH3-CH(NH2)-COOH|ácido 2-aminopropanoico|alanina|amina,cooh
+polifuncionales|CH3-CO-COOH|ácido 2-oxopropanoico|ácido pirúvico|cetona,cooh
+polifuncionales|CH3-CO-CH2-COOH|ácido 3-oxobutanoico||cetona,cooh
+polifuncionales|CH3-CO-CH2-CH2-COOH|ácido 4-oxopentanoico|ácido levulínico|cetona,cooh
+polifuncionales|OHC-CH2-CH2-CO-CH2-COOH|ácido 3,6-dioxohexanoico|ácido 5-formil-3-oxopentanoico|aldehido,cetona,cooh
+polifuncionales|CH3-CH(CN)-COOH|ácido 2-cianopropanoico||nitrilo,cooh
+polifuncionales|@6 a v0=COOH v1=OH|ácido 2-hidroxibenzoico|ácido salicílico|alcohol,cooh
+polifuncionales|@6 a v0=COOH v3=NH2|ácido 4-aminobenzoico||amina,cooh
+polifuncionales|@6 a v0=COOH v1=CONH2|ácido 2-carbamoilbenzoico||amida,cooh
+polifuncionales|CH3-CO-CH2-CHO|3-oxobutanal||cetona,aldehido
+polifuncionales|CH3-CO-CHO|2-oxopropanal||cetona,aldehido
+polifuncionales|CH3-CHOH-CH2-CHO|3-hidroxibutanal||alcohol,aldehido
+polifuncionales|NH2-CH2-CH2-CH2-CHO|4-aminobutanal||amina,aldehido
+polifuncionales|@6 a v0=CHO v3=OH|4-hidroxibenzaldehído||aldehido,alcohol
+polifuncionales|CH3-CO-CH2-CH2OH|4-hidroxibutan-2-ona|4-hidroxi-2-butanona|cetona,alcohol
+polifuncionales|CH3-CO-CH2OH|1-hidroxipropan-2-ona|hidroxipropanona;1-hidroxi-2-propanona|cetona,alcohol
+polifuncionales|CH3-CO-CH(CH3)-CHOH-CH3|4-hidroxi-3-metilpentan-2-ona|4-hidroxi-3-metil-2-pentanona|cetona,alcohol
+polifuncionales|CH3-CO-CH2-CH2Cl|4-clorobutan-2-ona|4-cloro-2-butanona|cetona
+polifuncionales|CH3-CHOH-CH2-CH2-NH2|4-aminobutan-2-ol|4-amino-2-butanol|alcohol,amina
+polifuncionales|NH2-CH2-CH2-OH|2-aminoetan-1-ol|2-aminoetanol;etanolamina|amina,alcohol
+polifuncionales|CH2OH-CH(NH2)-CH3|2-aminopropan-1-ol|2-amino-1-propanol|amina,alcohol
+polifuncionales|CH3-O-CH2-CH2-CH2-OH|3-metoxipropan-1-ol|3-metoxi-1-propanol|eter,alcohol
+polifuncionales|CH3-CHOH-CN|2-hidroxipropanonitrilo||alcohol,nitrilo
+polifuncionales|HO-CH2-CH2-CONH2|3-hidroxipropanamida||alcohol,amida
+polifuncionales|CH3-COO-CH2-CH2-OH|etanoato de 2-hidroxietilo|acetato de 2-hidroxietilo|ester,alcohol
+polifuncionales|CH3-CH(NH2)-COO-CH3|2-aminopropanoato de metilo||amina,ester
+polifuncionales|@6 a v0=OH v2=NO2|3-nitrofenol|m-nitrofenol|alcohol
+`;
+
+/* ===== FAMILIAS Y BLOQUES ===== */
+const FAMILIES = {
+  hidro: 'Hidrocarburos',
+  halo:  'Halogenados',
+  oxi:   'Oxigenados',
+  nitro: 'Nitrogenados',
+  poli:  'Varios grupos'
+};
+const BLOCKS = [
+  {id:'alcanos',        name:'Alcanos',                fam:'hidro', topic:'t-alcanos'},
+  {id:'ciclicos',       name:'Cicloalcanos y cicloalquenos', fam:'hidro', topic:'t-ciclos'},
+  {id:'alquenos',       name:'Alquenos',               fam:'hidro', topic:'t-alquenos'},
+  {id:'alquinos',       name:'Alquinos y eninos',      fam:'hidro', topic:'t-alquinos2'},
+  {id:'aromaticos',     name:'Aromáticos',             fam:'hidro', topic:'t-arom'},
+  {id:'halogenados',    name:'Derivados halogenados',  fam:'halo',  topic:'t-halo'},
+  {id:'alcoholes',      name:'Alcoholes y fenoles',    fam:'oxi',   topic:'t-alcoholes'},
+  {id:'eteres',         name:'Éteres',                 fam:'oxi',   topic:'t-eteres'},
+  {id:'aldehidos',      name:'Aldehídos',              fam:'oxi',   topic:'t-aldehidos'},
+  {id:'cetonas',        name:'Cetonas',                fam:'oxi',   topic:'t-cetonas'},
+  {id:'acidos',         name:'Ácidos carboxílicos',    fam:'oxi',   topic:'t-acidos'},
+  {id:'esteres',        name:'Ésteres y sales',        fam:'oxi',   topic:'t-esteres'},
+  {id:'aminas',         name:'Aminas',                 fam:'nitro', topic:'t-aminas'},
+  {id:'amidas',         name:'Amidas',                 fam:'nitro', topic:'t-amidas'},
+  {id:'nitrilos',       name:'Nitrilos',               fam:'nitro', topic:'t-nitrilos'},
+  {id:'nitroderivados', name:'Nitroderivados',         fam:'nitro', topic:'t-nitro'},
+  {id:'polifuncionales',name:'Compuestos con varios grupos', fam:'poli', topic:'t-poli'}
+];
+
+/* ===== GRUPOS FUNCIONALES POR ORDEN DE PRIORIDAD ===== */
+const GROUPS = [
+  {id:'cooh',    name:'ácido carboxílico', f:'R-COOH',   suf:'ácido …-oico',      pre:'carboxi-',                  ex:['CH3-COOH','ácido etanoico']},
+  {id:'ester',   name:'éster',             f:'R-COO-R\'', suf:'…-ato de …-ilo',    pre:'alcoxicarbonil-',           ex:['CH3-COO-CH3','etanoato de metilo']},
+  {id:'amida',   name:'amida',             f:'R-CONH2',  suf:'…-amida',           pre:'carbamoil-',                ex:['CH3-CONH2','etanamida']},
+  {id:'nitrilo', name:'nitrilo',           f:'R-CN',     suf:'…-nitrilo',         pre:'ciano-',                    ex:['CH3-CN','etanonitrilo']},
+  {id:'aldehido',name:'aldehído',          f:'R-CHO',    suf:'…-al',              pre:'formil- (u oxo-)',          ex:['CH3-CHO','etanal']},
+  {id:'cetona',  name:'cetona',            f:'R-CO-R\'',  suf:'…-ona',             pre:'oxo-',                      ex:['CH3-CO-CH3','propanona']},
+  {id:'alcohol', name:'alcohol / fenol',   f:'R-OH',     suf:'…-ol',              pre:'hidroxi-',                  ex:['CH3-CH2-OH','etanol']},
+  {id:'amina',   name:'amina',             f:'R-NH2',    suf:'…-amina',           pre:'amino-',                    ex:['CH3-NH2','metanamina']},
+  {id:'eter',    name:'éter',              f:'R-O-R\'',   suf:'(sin sufijo: se nombra como alcoxi-)', pre:'alcoxi- (metoxi-, etoxi-…)', ex:['CH3-O-CH3','metoximetano']}
+];
+/* Grupos que nunca son principales (solo para el juego de prefijos) */
+const ALWAYS_PREFIX = [
+  {id:'halo',  name:'halógeno',  f:'R-X (X = F, Cl, Br, I)', pre:'fluoro-, cloro-, bromo-, yodo-'},
+  {id:'nitro', name:'nitro',     f:'R-NO2',                  pre:'nitro-'}
+];
+
+
+/* ======================================================================
+   MOTOR DE FÓRMULAS
+   ====================================================================== */
+const ALL = RAW.trim().split('\n')
+  .map(l=>l.trim())
+  .filter(l=>l && !l.startsWith('#'))
+  .map(line=>{
+    const parts = line.split('|');
+    return {
+      block: parts[0],
+      formula: parts[1],
+      name: parts[2],
+      alts: (parts[3]||'').split(';').map(s=>s.trim()).filter(Boolean),
+      groups: (parts[4]||'').split(',').map(s=>s.trim()).filter(Boolean)
+    };
+  });
+const byBlock = id => ALL.filter(c=>c.block===id);
+
+const GROUP_TOKEN = {
+  alcoholes:['OH'], eteres:['O'], aldehidos:['CHO'], cetonas:['CO'],
+  acidos:['COOH'], esteres:['COO'], aminas:['NH2','N'], amidas:['CONH2','CON'],
+  nitrilos:['CN'], nitroderivados:['NO2'],
+  halogenados:['F','Cl','Br','I']
+};
+const HILITE_RAW = {
+  alcoholes: /OH/g,
+  eteres: /(?<=-)O(?=-)/g,
+  aldehidos: /CHO/g,
+  cetonas: /CO(?!O)/g,
+  acidos: /COOH/g,
+  esteres: /COO/g,
+  aminas: /NH2|NH(?!\d)|N(?=\()/g,
+  amidas: /CONH2|CON(?=\()/g,
+  nitrilos: /C\u2261N|CN/g,
+  nitroderivados: /NO2/g,
+  halogenados: /Cl|Br|F(?![a-z])|I(?![a-z])/g
+};
+
+function fmtText(s){
+  if(s==null) return '';
+  let out = String(s);
+  /* las subíndices deben resolverse ANTES de introducir HTML, para que los
+     dígitos de las clases (bond2, bond3) no se confundan con subíndices */
+  /* el carácter marcador de resaltado (\u0002) puede colarse entre una letra
+     y su subíndice (p.ej. "Cl\u00022" en halogenados); se tolera y se conserva */
+  out = out.replace(/([A-Za-z\)\]])(\u0002?)(\d+)/g, '$1$2<sub>$3</sub>');
+  out = out.replace(/-|=|\u2261/g, function(m){
+    if(m === '-') return '<span class="bond">\u2013</span>';
+    if(m === '=') return '<span class="bond bond2">=</span>';
+    return '<span class="bond bond3">\u2261</span>';
+  });
+  return out;
+}
+
+function fmtChain(raw, block){
+  let marked = raw;
+  const re = HILITE_RAW[block];
+  if(re){
+    re.lastIndex = 0;
+    marked = raw.replace(re, m => '\u0001'+m+'\u0002');
+  }
+  let html = fmtText(marked);
+  html = html.replace(/\u0001/g,'<span class="grp">').replace(/\u0002/g,'</span>');
+  return html;
+}
+
+/* subíndices válidos dentro de <text> SVG (no se puede usar <sub> de HTML) */
+function fmtSvgLabel(s){
+  s = String(s);
+  let out = '', i = 0;
+  while(i < s.length){
+    if(/[A-Za-z\)\]]/.test(s[i]) && /\d/.test(s[i+1]||'')){
+      out += s[i]; i++;
+      let digits = '';
+      while(/\d/.test(s[i]||'')){ digits += s[i]; i++; }
+      out += `<tspan baseline-shift="-6" font-size="0.72em">${digits}</tspan>`;
+    } else {
+      out += s[i]; i++;
+    }
+  }
+  return out;
+}
+
+/* --- generador de anillos --- */
+function ringSVG(spec, block){
+  const parts = spec.trim().split(/\s+/);
+  const n = parseInt(parts[0].slice(1),10);
+  let aromatic=false;
+  const doubleEdges = new Set();
+  const subs = {};   // idx -> [labels]
+  const exo = {};    // idx -> label (doble enlace exocíclico, p.ej. =O)
+  for(let i=1;i<parts.length;i++){
+    const p = parts[i];
+    let m;
+    if(p==='a'){ aromatic = true; }
+    else if((m=p.match(/^d(\d+)$/))){ doubleEdges.add(parseInt(m[1],10)); }
+    else if((m=p.match(/^v(\d+)=(.+)$/))){ const idx=m[1]; (subs[idx]=subs[idx]||[]).push(m[2]); }
+    else if((m=p.match(/^w(\d+)=(.+)$/))){ exo[m[1]] = m[2]; }
+  }
+  if(aromatic){ for(let e=0;e<n;e+=2) doubleEdges.add(e); }
+
+  const size = 210, cx = size/2, cy = size/2 + 2, R = 46;
+  const pt = i => {
+    const ang = (-90 + i*(360/n)) * Math.PI/180;
+    return [cx + R*Math.cos(ang), cy + R*Math.sin(ang)];
+  };
+  let svg = `<svg class="ring-svg" viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg">`;
+
+  for(let i=0;i<n;i++){
+    const [x1,y1] = pt(i), [x2,y2] = pt((i+1)%n);
+    svg += `<line class="edge" x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}"/>`;
+    if(doubleEdges.has(i)){
+      const mx=(x1+x2)/2, my=(y1+y2)/2;
+      const inx = cx-mx, iny = cy-my; const len=Math.hypot(inx,iny)||1;
+      const ox = x1 + (inx/len)*7, oy = y1 + (iny/len)*7;
+      const ox2 = x2 + (inx/len)*7, oy2 = y2 + (iny/len)*7;
+      svg += `<line class="edge" x1="${ox.toFixed(1)}" y1="${oy.toFixed(1)}" x2="${ox2.toFixed(1)}" y2="${oy2.toFixed(1)}"/>`;
+    }
+  }
+
+  Object.keys(subs).forEach(idx=>{
+    const labels = subs[idx];
+    const i = parseInt(idx,10);
+    const [vx,vy] = pt(i);
+    const baseAng = (-90 + i*(360/n));
+    const spread = labels.length>1 ? [-18,18] : [0];
+    labels.forEach((label,k)=>{
+      const ang = (baseAng + (spread[k]||0)) * Math.PI/180;
+      const ex = vx + 26*Math.cos(ang), ey = vy + 26*Math.sin(ang);
+      const lx = vx + 40*Math.cos(ang), ly = vy + 40*Math.sin(ang);
+      svg += `<line class="subline" x1="${vx.toFixed(1)}" y1="${vy.toFixed(1)}" x2="${ex.toFixed(1)}" y2="${ey.toFixed(1)}"/>`;
+      const isGrp = (GROUP_TOKEN[block]||[]).some(tok => label.includes(tok));
+      svg += `<text class="sublabel${isGrp?' grp':''}" x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="13" text-anchor="${Math.cos(ang)>0.2?'start':(Math.cos(ang)<-0.2?'end':'middle')}" dominant-baseline="middle">${fmtSvgLabel(label)}</text>`;
+    });
+  });
+
+  Object.keys(exo).forEach(idx=>{
+    const label = exo[idx];
+    const i = parseInt(idx,10);
+    const [vx,vy] = pt(i);
+    const baseAng = (-90 + i*(360/n)) * Math.PI/180;
+    const ex = vx + 26*Math.cos(baseAng), ey = vy + 26*Math.sin(baseAng);
+    const lx = vx + 40*Math.cos(baseAng), ly = vy + 40*Math.sin(baseAng);
+    const perpx = -Math.sin(baseAng)*3, perpy = Math.cos(baseAng)*3;
+    svg += `<line class="exo" x1="${(vx+perpx).toFixed(1)}" y1="${(vy+perpy).toFixed(1)}" x2="${(ex+perpx).toFixed(1)}" y2="${(ey+perpy).toFixed(1)}"/>`;
+    svg += `<line class="exo" x1="${(vx-perpx).toFixed(1)}" y1="${(vy-perpy).toFixed(1)}" x2="${(ex-perpx).toFixed(1)}" y2="${(ey-perpy).toFixed(1)}"/>`;
+    svg += `<text class="sublabel grp" x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" font-size="13" text-anchor="middle" dominant-baseline="middle">${fmtSvgLabel(label)}</text>`;
+  });
+
+  svg += `</svg>`;
+  return svg;
+}
+
+function renderFormula(compound){
+  if(compound.formula.startsWith('@')){
+    return ringSVG(compound.formula, compound.block);
+  }
+  return `<div class="rformula">${fmtChain(compound.formula, compound.block)}</div>`;
+}
+
+function compoundCard(c, opts){
+  opts = opts || {};
+  const altsHtml = (c.alts && c.alts.length) ? `<div class="calts">${c.alts.join(' · ')}</div>` : '';
+  const nameHtml = opts.hideName ? '' : `<div class="cname">${c.name}</div>${altsHtml}`;
+  return `<div class="compound">${renderFormula(c)}${nameHtml}</div>`;
+}
+
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ===================== normalización de respuestas de texto ===================== */
+function normLoose(s){
+  return String(s||'')
+    .toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[^a-z0-9]/g,'');
+}
+function answerMatches(typed, compound){
+  const t = normLoose(typed);
+  if(!t) return false;
+  const candidates = [compound.name, ...compound.alts];
+  return candidates.some(c => normLoose(c) === t);
+}
+
+/* ===================== generación del test ===================== */
+function buildTest(n, selectedBlocks, mix){
+  const blocksShuffled = shuffle(selectedBlocks);
+  const per = Math.floor(n / blocksShuffled.length);
+  let remainder = n - per*blocksShuffled.length;
+  let chosen = [];
+  blocksShuffled.forEach(b=>{
+    let take = per + (remainder>0 ? 1 : 0);
+    if(remainder>0) remainder--;
+    const pool = shuffle(byBlock(b));
+    chosen = chosen.concat(pool.slice(0, Math.min(take, pool.length)));
+  });
+  chosen = shuffle(chosen).slice(0, n);
+  chosen = shuffle(chosen);
+
+  let items = chosen.map(c=>{
+    let type;
+    if(mix==='nombrar') type='f2n';
+    else if(mix==='formular') type='n2f';
+    else type = null; // se decide tras repartir a partes iguales
+    return {c, type};
+  });
+  if(mix==='mezcla'){
+    const half = Math.ceil(items.length/2);
+    items.forEach((it,i)=> it.type = i<half ? 'f2n' : 'n2f');
+    items = shuffle(items);
+  }
+  const parte1 = items.filter(it=>it.type==='f2n');
+  const parte2 = items.filter(it=>it.type==='n2f');
+  return {parte1, parte2};
+}
+
+/* ===================== estado ===================== */
+let CURRENT_TEST = null;
+
+function selectedBlockIds(){
+  return Array.from(document.querySelectorAll('.block-check:checked')).map(el=>el.value);
+}
+
+function renderConfig(){
+  const famGroups = {};
+  BLOCKS.forEach(b=>{ (famGroups[b.fam] = famGroups[b.fam]||[]).push(b); });
+  const blocksHtml = Object.keys(famGroups).map(fam=>`
+    <div style="margin-top:10px;">
+      <span class="eyebrow" style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--ink-faint);">${FAMILIES[fam]}</span>
+      <div class="blocks-grid">
+        ${famGroups[fam].map(b=>`<label><input type="checkbox" class="block-check" value="${b.id}" checked> ${b.name}</label>`).join('')}
+      </div>
+    </div>`).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div id="configPanel">
+      <div class="card">
+        <h2>Configura tu test</h2>
+        <p>Elige cuántos ejercicios quieres y de qué bloques. Se generará un test distinto cada vez que lo pidas.</p>
+        <div class="field-row">
+          <div class="field">
+            <label for="numEj">Nº de ejercicios</label>
+            <select id="numEj">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="60">60</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Tipo de ejercicios</label>
+            <div class="radio-row">
+              <label><input type="radio" name="mix" value="mezcla" checked> Mezcla (nombrar y formular)</label>
+              <label><input type="radio" name="mix" value="nombrar"> Solo nombrar</label>
+              <label><input type="radio" name="mix" value="formular"> Solo formular</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label style="font-size:.82rem;color:var(--ink-soft);font-weight:600;">Bloques a incluir
+            <button type="button" class="fam-toggle" id="toggleAll" style="margin-left:10px;">marcar/desmarcar todos</button>
+          </label>
+          ${blocksHtml}
+        </div>
+        <div style="margin-top:18px;">
+          <button class="btn" id="genBtn" type="button">Generar test</button>
+        </div>
+      </div>
+    </div>
+    <div id="testArea" class="hidden"></div>
+  `;
+
+  document.getElementById('toggleAll').addEventListener('click', ()=>{
+    const boxes = document.querySelectorAll('.block-check');
+    const allChecked = Array.from(boxes).every(b=>b.checked);
+    boxes.forEach(b=> b.checked = !allChecked);
+  });
+  document.getElementById('genBtn').addEventListener('click', generateAndShowTest);
+}
+
+function generateAndShowTest(){
+  const n = parseInt(document.getElementById('numEj').value, 10);
+  const mix = document.querySelector('input[name="mix"]:checked').value;
+  let blocks = selectedBlockIds();
+  if(!blocks.length) blocks = BLOCKS.map(b=>b.id);
+  CURRENT_TEST = buildTest(n, blocks, mix);
+  renderTest();
+  document.getElementById('testArea').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function exerciseHtml(item, idx, part){
+  const c = item.c;
+  if(item.type === 'f2n'){
+    return `
+      <div class="exercise" data-part="${part}" data-idx="${idx}">
+        <div class="exnum">${idx+1}.</div>
+        <div class="exq">
+          ${renderFormula(c)}
+          <div class="ex-input">
+            <input type="text" class="ans-input" placeholder="Escribe el nombre..." autocomplete="off" autocapitalize="off" spellcheck="false">
+            <span class="ex-fb"></span>
+          </div>
+          <div class="reveal"></div>
+        </div>
+      </div>`;
+  }else{
+    return `
+      <div class="exercise" data-part="${part}" data-idx="${idx}">
+        <div class="exnum">${idx+1}.</div>
+        <div class="exq">
+          <div class="name-prompt">${c.name}</div>
+          <div class="ex-input">
+            <input type="text" class="ans-input" placeholder="Escribe la fórmula (en tu cuaderno o aquí)..." autocomplete="off" spellcheck="false">
+            <button type="button" class="linklike btn-reveal">Ver fórmula correcta</button>
+          </div>
+          <div class="reveal"></div>
+        </div>
+      </div>`;
+  }
+}
+
+function renderTest(){
+  const {parte1, parte2} = CURRENT_TEST;
+  const code = Math.floor(1000 + Math.random()*9000);
+  const dateStr = new Date().toLocaleDateString('es-ES', {day:'2-digit', month:'2-digit', year:'numeric'});
+
+  let html = `
+    <div class="testhead">
+      <h2 style="margin-bottom:0;">Test de formulación orgánica</h2>
+      <span class="testcode">modelo ${code} · ${dateStr}</span>
+    </div>
+    <p class="print-only" style="margin-top:0;">Nombre y apellidos: _____________________________________________</p>
+    <div class="score-banner" id="scoreBanner"></div>
+  `;
+
+  if(parte1.length){
+    html += `<h3 class="part-title">Parte 1 · Nombra estos compuestos</h3><div class="card">`;
+    html += parte1.map((it,i)=> exerciseHtml(it, i, 1)).join('');
+    html += `</div>`;
+  }
+  if(parte2.length){
+    html += `<h3 class="part-title">Parte 2 · Formula estos compuestos</h3><div class="card">`;
+    html += parte2.map((it,i)=> exerciseHtml(it, i, 2)).join('');
+    html += `</div>`;
+  }
+
+  document.getElementById('configPanel').classList.add('hidden');
+  const area = document.getElementById('testArea');
+  area.classList.remove('hidden');
+  area.innerHTML = html;
+
+  document.querySelectorAll('.exercise').forEach(exEl=>{
+    const part = parseInt(exEl.dataset.part,10);
+    const idx = parseInt(exEl.dataset.idx,10);
+    const item = part===1 ? CURRENT_TEST.parte1[idx] : CURRENT_TEST.parte2[idx];
+    const revealBtn = exEl.querySelector('.btn-reveal');
+    if(revealBtn){
+      revealBtn.addEventListener('click', ()=>{
+        const rev = exEl.querySelector('.reveal');
+        rev.innerHTML = `<b>Fórmula correcta:</b> ${renderFormula(item.c)}`;
+        rev.classList.add('show');
+        revealBtn.disabled = true;
+        revealBtn.textContent = 'Fórmula mostrada';
+      });
+    }
+  });
+
+  buildToolbar();
+}
+
+function buildToolbar(){
+  let bar = document.getElementById('toolbarEl');
+  if(bar) bar.remove();
+  bar = document.createElement('div');
+  bar.id = 'toolbarEl';
+  bar.className = 'toolbar no-print';
+  const hasPart1 = CURRENT_TEST.parte1.length > 0;
+  bar.innerHTML = `<div class="wrap">
+    ${hasPart1 ? '<button class="btn" id="correctBtn" type="button">Corregir Parte 1</button>' : ''}
+    <button class="btn subtle" id="printBtn" type="button">Imprimir / PDF</button>
+    <button class="btn ghost" id="newBtn" type="button">Nuevo test</button>
+  </div>`;
+  document.body.appendChild(bar);
+  if(hasPart1) document.getElementById('correctBtn').addEventListener('click', correctPart1);
+  document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+  document.getElementById('newBtn').addEventListener('click', ()=>{
+    document.getElementById('testArea').classList.add('hidden');
+    document.getElementById('configPanel').classList.remove('hidden');
+    document.getElementById('toolbarEl').remove();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+}
+
+function correctPart1(){
+  const exercises = document.querySelectorAll('.exercise[data-part="1"]');
+  let correct = 0;
+  exercises.forEach(exEl=>{
+    const idx = parseInt(exEl.dataset.idx,10);
+    const item = CURRENT_TEST.parte1[idx];
+    const input = exEl.querySelector('.ans-input');
+    const fb = exEl.querySelector('.ex-fb');
+    const ok = answerMatches(input.value, item.c);
+    fb.textContent = ok ? 'Correcto' : `Solución: ${item.c.name}`;
+    fb.className = 'ex-fb ' + (ok?'good':'bad');
+    input.disabled = true;
+    if(ok) correct++;
+  });
+  const banner = document.getElementById('scoreBanner');
+  if(exercises.length){
+    banner.textContent = `Parte 1: ${correct} de ${exercises.length} correctas (${Math.round(100*correct/exercises.length)}%).`;
+    banner.classList.add('show');
+    if(correct < exercises.length) banner.style.color = 'var(--ink)';
+  }
+  banner.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+function initTheme(){
+  const btn = document.getElementById('themeBtn');
+  let saved = null;
+  try{ saved = localStorage.getItem('organica_theme'); }catch(e){}
+  if(saved) document.documentElement.setAttribute('data-theme', saved);
+  btn.addEventListener('click', ()=>{
+    const current = document.documentElement.getAttribute('data-theme');
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = current ? current==='dark' : prefersDark;
+    const next = isDark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try{ localStorage.setItem('organica_theme', next); }catch(e){}
+  });
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderConfig();
+  initTheme();
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Profe Juanjo Virtual · Entrenador de formulación inorgánica</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#F3F6FB; --surface:#FFFFFF; --surface2:#EAF0F8; --ink:#10233A; --ink2:#465A72; --line:#D0DAE7;
+  --brand:#2A3FB8; --brandInk:#FFFFFF;
+  --ok:#0B6B41; --okBg:#E0F4E9; --warn:#87500A; --warnBg:#FFF0D2; --bad:#A8231B; --badBg:#FCE6E3;
+  --fgL:33%; --bgL:94%; --sat:62%;
+  --display:'Bricolage Grotesque','Avenir Next','Segoe UI',system-ui,sans-serif;
+  --text:'Atkinson Hyperlegible','Segoe UI',system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1521; --surface:#152135; --surface2:#1B2A42; --ink:#E7EEF8; --ink2:#A2B3C9; --line:#2A3B55;
+    --brand:#8EA2FF; --brandInk:#0D1521;
+    --ok:#6FE0A6; --okBg:#123626; --warn:#F4C66B; --warnBg:#3A2A0E; --bad:#FF9C93; --badBg:#43201D;
+    --fgL:72%; --bgL:19%; --sat:48%;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1521; --surface:#152135; --surface2:#1B2A42; --ink:#E7EEF8; --ink2:#A2B3C9; --line:#2A3B55;
+  --brand:#8EA2FF; --brandInk:#0D1521;
+  --ok:#6FE0A6; --okBg:#123626; --warn:#F4C66B; --warnBg:#3A2A0E; --bad:#FF9C93; --badBg:#43201D;
+  --fgL:72%; --bgL:19%; --sat:48%;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--text);font-size:17px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:920px;margin:0 auto;padding:20px 18px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:6px}
+sub{font-size:.68em;line-height:0;vertical-align:baseline;position:relative;top:.3em}
+sup{font-size:.68em;line-height:0;vertical-align:baseline;position:relative;top:-.45em}
+
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink2)}
+.brand b{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--brand);color:var(--brandInk);font-size:16px}
+h1{font-family:var(--display);font-weight:750;font-size:clamp(30px,5.4vw,46px);line-height:1.04;letter-spacing:-.025em;margin:22px 0 10px;max-width:16em}
+.lead{max-width:58ch;color:var(--ink2);margin:0 0 18px}
+details.norma{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 16px;margin:0 0 26px;max-width:720px}
+details.norma summary{cursor:pointer;padding:12px 0;font-weight:700}
+details.norma ul{margin:0 0 14px;padding-left:20px;color:var(--ink2)}
+details.norma li{margin:5px 0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;list-style:none;margin:0;padding:0}
+.tile{--mc:hsl(var(--mh) var(--sat) var(--fgL));--mbg:hsl(var(--mh) var(--sat) var(--bgL));
+  display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;text-align:left;
+  background:var(--surface);border:1px solid var(--line);border-top:7px solid var(--mc);border-radius:12px;padding:14px 16px 14px;min-height:150px}
+.tile:hover{background:var(--mbg)}
+.tile .sym{font-family:var(--display);font-weight:750;font-size:34px;line-height:1.1;letter-spacing:-.02em;color:var(--mc);min-height:40px}
+.tile .nm{font-weight:700;font-size:17px;line-height:1.25}
+.tile .meta{margin-top:auto;font-size:14px;color:var(--ink2)}
+.tile.exam{border-style:dashed;border-top-style:solid}
+.tile.neutral{--sat:10%}
+
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:700}
+.btn:hover{background:var(--surface2)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:var(--brandInk)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.link{border:0;background:none;padding:9px 4px;text-decoration:underline;color:var(--ink2);font-weight:400}
+.count{color:var(--ink2);font-size:15px}
+.modhead{--mc:hsl(var(--mh) var(--sat) var(--fgL));--mbg:hsl(var(--mh) var(--sat) var(--bgL));margin-top:14px}
+.modhead h2{font-family:var(--display);font-weight:750;font-size:clamp(26px,4.6vw,36px);line-height:1.08;letter-spacing:-.02em;margin:6px 0 12px;color:var(--mc)}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.pill{width:22px;height:8px;border-radius:99px;background:var(--line)}
+.pill.cur{background:var(--ink2)}
+.pill.first{background:var(--ok)}
+.pill.help{background:var(--warn)}
+.pill.fail{background:var(--bad)}
+details.regla{background:var(--mbg);border-radius:12px;padding:0 16px;margin:0 0 16px}
+details.regla summary{cursor:pointer;padding:11px 0;font-weight:700}
+details.regla ul{margin:0 0 12px;padding-left:20px}
+details.regla li{margin:5px 0}
+.plate{--mc:hsl(var(--mh) var(--sat) var(--fgL));background:var(--surface);border:1px solid var(--line);border-left:8px solid var(--mc);border-radius:12px;padding:18px 20px 16px;margin:0 0 14px}
+.plate .lab{color:var(--ink2);font-size:15px;margin:0 0 4px}
+.plate .big{font-family:var(--display);font-weight:750;line-height:1.05;letter-spacing:-.02em;overflow-wrap:anywhere}
+.plate .big.formula{font-size:clamp(44px,11vw,72px)}
+.plate .big.words{font-size:clamp(28px,6.4vw,42px)}
+.plate .big.ask{font-size:clamp(22px,4.6vw,30px);font-weight:650;line-height:1.2}
+.chip{display:inline-block;margin-top:12px;background:var(--surface2);border-radius:99px;padding:3px 12px;font-size:14px;color:var(--ink2)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.row input{flex:1 1 240px;min-width:0;font:inherit;font-size:20px;padding:12px 14px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+.row input:focus-visible{border-color:var(--brand);outline-offset:1px}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0;align-items:center}
+.ins{min-width:38px;padding:6px 10px;font-size:18px}
+.fb{margin:16px 0 0;border-radius:12px;padding:14px 16px;border-left:8px solid var(--line);background:var(--surface2)}
+.fb[hidden]{display:none}
+.fb.ok{background:var(--okBg);border-color:var(--ok)}
+.fb.warn{background:var(--warnBg);border-color:var(--warn)}
+.fb.bad{background:var(--badBg);border-color:var(--bad)}
+.fb .t{font-family:var(--display);font-weight:700;font-size:20px;margin:0 0 4px}
+.fb.ok .t{color:var(--ok)} .fb.warn .t{color:var(--warn)} .fb.bad .t{color:var(--bad)}
+.fb p{margin:6px 0}
+.fb .sol{font-family:var(--display);font-weight:700;font-size:24px}
+.fb .go{margin-top:10px}
+@media (prefers-reduced-motion:no-preference){ .fb:not([hidden]){animation:pop .16s ease-out} }
+@keyframes pop{from{opacity:.2;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.score{font-family:var(--display);font-weight:750;font-size:clamp(34px,7vw,54px);line-height:1.05;letter-spacing:-.02em;margin:14px 0 4px}
+.rev{list-style:none;margin:16px 0;padding:0;display:grid;gap:8px}
+.rev li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;display:grid;grid-template-columns:28px 1fr;gap:10px}
+.rev .g{font-weight:800;font-size:20px}
+.rev .g.first{color:var(--ok)} .rev .g.help{color:var(--warn)} .rev .g.fail{color:var(--bad)}
+.rev .q{font-weight:700}
+.rev .a{color:var(--ink2);font-size:15px;margin-top:2px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+footer{margin-top:36px;color:var(--ink2);font-size:14px;max-width:70ch}
+.wide{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"><noscript>Esta página necesita JavaScript para funcionar.</noscript></div>
+<script>
+/* ============ DATOS ============ */
+const N=(q,a,h,e)=>({k:'N',q,a,h,e}), F=(q,a,h,e)=>({k:'F',q,a,h,e}), C=(q,a,h,e)=>({k:'C',q,a,h,e});
+const Q=(q,a,show,h,e)=>({k:'Q',q,a,show,h,e}), T=(q,a,show,h,e)=>({k:'T',q,a,show,h,e});
+const NB='Vale Stock (números romanos) o prefijos multiplicadores';
+const MODS=[
+{n:'Números de oxidación',sym:'+ / −',mh:215,neutral:true,norma:'Responde con los números, por ejemplo +2 y +3',
+ rule:['Grupo 1: +1. Grupo 2: +2. Grupo 13 (B, Al…): +3. Cinc: +2. Plata: +1.',
+ 'Los metales de la zona central casi siempre tienen varios números: hierro +2 y +3; cobre +1 y +2; oro +1 y +3; mercurio +1 y +2; platino y paladio +2 y +4.',
+ 'Halógenos (Cl, Br, I): +1, +3, +5, +7. Anfígenos (S, Se, Te): +2, +4, +6. Nitrógeno: de +1 a +5; forman ácidos los impares.',
+ 'El hidrógeno es +1, salvo en los hidruros metálicos, donde es −1. El oxígeno es −2, y −1 en los peróxidos.'],
+ items:[
+ Q('¿Con qué números de oxidación positivos actúa el hierro?',[2,3],'+2 y +3','El hierro es un metal de transición: tiene más de un número. Piensa en Fe(II) y Fe(III).','Hierro: +2 y +3. Por eso hay que indicarlo: óxido de hierro(II) y óxido de hierro(III).'),
+ Q('¿Cuál es el único número de oxidación del aluminio?',[3],'+3','Está en el grupo 13 (boroideos).','Los elementos del grupo 13 solo actúan con +3, así que no lleva número romano: óxido de aluminio.'),
+ Q('¿Con qué números de oxidación forman ácidos el cloro, el bromo y el yodo?',[1,3,5,7],'+1, +3, +5 y +7','Los halógenos (salvo el flúor) usan los números impares positivos.','Cl, Br, I: +1, +3, +5, +7. Dan los ácidos hipo-oso, -oso, -ico y per-ico.'),
+ Q('¿Con qué número de oxidación actúa el hidrógeno en el NaH?',[-1],'−1','En los hidruros metálicos el hidrógeno gana un electrón. Fíjate en el signo.','En los hidruros metálicos el H es −1 (el metal aporta el +).'),
+ Q('¿Con qué números de oxidación actúan el platino y el paladio?',[2,4],'+2 y +4','Los dos están en la misma zona y solo tienen dos números.','Pd y Pt: solo +2 y +4.'),
+ Q('¿Con qué números de oxidación positivos actúa el nitrógeno?',[1,2,3,4,5],'de +1 a +5','El nitrógeno tiene muchos: prueba con todos los valores entre el más bajo y el más alto.','N: de +1 a +5. Forman ácidos los impares (+1, +3, +5): HNO, HNO2, HNO3.'),
+ Q('¿Con qué números de oxidación positivos actúa el azufre?',[2,4,6],'+2, +4 y +6','Los anfígenos (grupo 16) usan números pares.','S, Se y Te: +2, +4 y +6 (y −2 en sales y haluros).')]},
+
+{n:'Óxidos',sym:'O<sup>2−</sup>',mh:2,norma:NB,
+ rule:['Fórmula: MxOy. Los números de oxidación del metal (+m) y del oxígeno (−2) se cruzan y se simplifican si se puede.','Stock: «óxido de + metal»; si el metal tiene varios números de oxidación, número romano entre paréntesis: óxido de hierro(III).','Prefijos: trióxido de dihierro. El prefijo mono nunca va delante del último elemento nombrado.','Los óxidos de no metales se nombran igual: SO3, óxido de azufre(VI) o trióxido de azufre.'],
+ items:[
+ N('Li2O',['óxido de litio','óxido de dilitio','monóxido de dilitio'],'El litio es del grupo 1: ¿tiene uno o varios números de oxidación? Si solo tiene uno, no hace falta indicarlo.','Li (+1) y O (−2) dan Li2O. Como el litio solo tiene +1, en Stock basta «óxido de litio»; con prefijos, «óxido de dilitio».'),
+ N('Fe2O3',['óxido de hierro(III)','trióxido de dihierro'],'Hay dos hierros y tres oxígenos. ¿Qué número de oxidación del hierro sale de cruzar el 2 y el 3?','Al cruzar, el 3 (subíndice del O) es el número de oxidación del Fe. Stock: óxido de hierro(III). Prefijos: trióxido de dihierro.'),
+ N('SO3',['óxido de azufre(VI)','trióxido de azufre'],'Tres oxígenos con −2 suman −6. ¿Qué número de oxidación necesita el azufre?','3 × (−2) = −6, luego el azufre es +6: óxido de azufre(VI) o trióxido de azufre.'),
+ N('CuO',['óxido de cobre(II)','óxido de cobre','monóxido de cobre'],'Un cobre y un oxígeno (−2): ¿qué número de oxidación tiene el cobre?','Cu (+2) y O (−2) se compensan: óxido de cobre(II). Con prefijos, «óxido de cobre» o «monóxido de cobre».'),
+ F('óxido de cinc',['ZnO'],'El cinc solo actúa con +2 y el oxígeno con −2. ¿Qué subíndices salen al cruzar y simplificar?','Zn (+2) y O (−2): al cruzar sale Zn2O2, que se simplifica a ZnO.'),
+ F('óxido de níquel(III)',['Ni2O3'],'Cruza los números: el 3 del níquel pasa al oxígeno y el 2 del oxígeno pasa al níquel.','Ni (+3) y O (−2) dan Ni2O3.'),
+ F('pentaóxido de difósforo',['P2O5'],'Los prefijos indican directamente los subíndices: di- es 2 y penta- es 5.','Difósforo es P2 y pentaóxido es O5: P2O5.'),
+ F('óxido de manganeso(VII)',['Mn2O7'],'El 7 del manganeso pasa al oxígeno y el 2 del oxígeno pasa al manganeso.','Mn (+7) y O (−2) dan Mn2O7. No se puede simplificar.')]},
+
+{n:'Peróxidos',sym:'O<sub>2</sub><sup>2−</sup>',mh:24,norma:NB,
+ rule:['Contienen el grupo peroxo O2 (cada oxígeno con número de oxidación −1).','Metales con +1 (y el H): M2O2, sin simplificar (Na2O2, H2O2). Metales con +2: MO2 (BaO2).','Solo forman peróxidos los metales que actúan únicamente con +1, con +2 o con ambos. Hierro, níquel u oro no forman peróxidos.','Stock: peróxido de sodio. Prefijos: dióxido de disodio.'],
+ items:[
+ N('Na2O2',['peróxido de sodio','dióxido de disodio'],'El grupo O2 tiene carga −2 en conjunto. ¿Es un óxido normal o un peróxido?','Na2O2 lleva el grupo peroxo O2. Stock: peróxido de sodio. Prefijos: dióxido de disodio.'),
+ N('BaO2',['peróxido de bario','dióxido de bario'],'Un bario (+2) y un grupo O2 (−2): se compensan sin subíndices.','BaO2: peróxido de bario o dióxido de bario.'),
+ N('H2O2',['peróxido de hidrógeno','dióxido de dihidrógeno'],'Es el agua oxigenada. ¿Cómo se nombra el grupo O2?','H2O2: peróxido de hidrógeno o dióxido de dihidrógeno.'),
+ F('peróxido de litio',['Li2O2'],'Litio +1 y grupo O2 (−2). Recuerda que el O2 no se simplifica.','Dos Li (+1) compensan al grupo O2 (−2): Li2O2.'),
+ F('peróxido de estroncio',['SrO2'],'El estroncio (grupo 2) es +2 y el grupo O2 es −2: se compensan.','Sr (+2) y O2 (−2): SrO2.'),
+ F('dióxido de dicesio',['Cs2O2'],'Los prefijos dan los subíndices: di- = 2 cesios; dióxido = O2.','Dicesio es Cs2 y dióxido es O2: Cs2O2.'),
+ T('¿Existe el peróxido de hierro?','no','No','Piensa en los números de oxidación del hierro: ¿cumplen la condición de ser solo +1 y/o +2?','No: solo forman peróxidos los metales que actúan únicamente con +1, con +2 o con ambos. El hierro tiene +2 y +3.')]},
+
+{n:'Hidróxidos',sym:'OH<sup>−</sup>',mh:44,norma:NB,
+ rule:['Fórmula: M(OH)m. El grupo OH vale −1, así que el número de oxidación del metal indica cuántos OH hay.','Con más de un OH se escribe entre paréntesis: Ca(OH)2. Con uno, sin paréntesis: NaOH.','Stock: hidróxido de hierro(III). Prefijos: trihidróxido de hierro.'],
+ items:[
+ N('Ca(OH)2',['hidróxido de calcio','dihidróxido de calcio'],'El grupo OH vale −1 y el calcio +2. ¿Cuántos OH hay? ¿Tiene el calcio más de un número de oxidación?','Ca (+2) con dos OH: hidróxido de calcio. Con prefijos: dihidróxido de calcio.'),
+ N('Fe(OH)3',['hidróxido de hierro(III)','trihidróxido de hierro'],'Hay tres OH (−1 cada uno). ¿Qué número de oxidación necesita el hierro?','Tres OH suman −3, luego Fe (+3): hidróxido de hierro(III) o trihidróxido de hierro.'),
+ N('CuOH',['hidróxido de cobre(I)','hidróxido de cobre','monohidróxido de cobre'],'Hay un solo OH. ¿Qué número de oxidación tiene el cobre aquí?','Un OH (−1) implica Cu (+1): hidróxido de cobre(I).'),
+ N('Pb(OH)4',['hidróxido de plomo(IV)','tetrahidróxido de plomo'],'Cuatro OH suman −4. ¿Qué número de oxidación tiene el plomo?','Cuatro OH → Pb (+4): hidróxido de plomo(IV) o tetrahidróxido de plomo.'),
+ F('hidróxido de potasio',['KOH'],'El potasio es +1 y el OH es −1: ¿cuántos OH?','K (+1) con un OH: KOH, sin paréntesis.'),
+ F('hidróxido de cromo(III)',['Cr(OH)3'],'El número de oxidación del cromo es el número de OH. ¿Paréntesis?','Cr (+3) necesita tres OH: Cr(OH)3.'),
+ F('dihidróxido de bario',['Ba(OH)2'],'Di- indica dos grupos OH.','Dos OH con paréntesis: Ba(OH)2.'),
+ F('hidróxido de oro(III)',['Au(OH)3'],'El número romano dice cuántos OH hay.','Au (+3) → tres OH: Au(OH)3.')]},
+
+{n:'Hidruros metálicos',sym:'H<sup>−</sup>',mh:84,norma:NB,
+ rule:['Fórmula: MHm. El hidrógeno vale −1 y se escribe a la derecha.','Se nombran como los óxidos, cambiando «óxido» por «hidruro».','Stock: hidruro de hierro(II). Prefijos: dihidruro de hierro.'],
+ items:[
+ N('NaH',['hidruro de sodio'],'El hidrógeno aquí es H−: se nombra «hidruro». ¿Tiene el sodio varios números de oxidación?','Na (+1) y H (−1): NaH. El sodio solo tiene +1, así que «hidruro de sodio».'),
+ N('AlH3',['hidruro de aluminio','trihidruro de aluminio'],'Tres H (−1) suman −3. ¿Cuántos números de oxidación tiene el aluminio?','Al (+3) con tres H. Stock: hidruro de aluminio. Prefijos: trihidruro de aluminio.'),
+ N('SnH4',['hidruro de estaño(IV)','tetrahidruro de estaño'],'Cuatro H (−1) suman −4: ¿qué número tiene el estaño?','Sn (+4): hidruro de estaño(IV) o tetrahidruro de estaño.'),
+ F('hidruro de calcio',['CaH2'],'El calcio es +2 y el H es −1. ¿Cuántos H?','Ca (+2) con dos H: CaH2.'),
+ F('hidruro de hierro(II)',['FeH2'],'El número romano es el número de H (el 1 no se escribe).','Fe (+2) con dos H: FeH2.'),
+ F('trihidruro de cromo',['CrH3'],'Tri- indica tres hidrógenos.','Un cromo y tres H: CrH3.')]},
+
+{n:'Hidruros no metálicos y haluros de hidrógeno',sym:'HCl',mh:140,norma:NB,
+ rule:['Grupos 13-15 (B, C, Si, N, P, As, Sb): XHn, con H a la derecha y nombres propios: NH3 amoniaco, PH3 fosfano, AsH3 arsano, SbH3 estibano, CH4 metano, SiH4 silano, BH3 borano (o con prefijos: trihidruro de nitrógeno…).','Grupos 16 y 17 (F, Cl, Br, I, S, Se, Te): HnX, con H a la izquierda. Nombre: «cloruro de hidrógeno», «sulfuro de hidrógeno».','«Ácido clorhídrico», «ácido sulfhídrico»… solo si está en disolución acuosa.'],
+ items:[
+ N('NH3',['amoniaco','trihidruro de nitrógeno'],'Es un hidruro de un no metal del grupo 15 con un nombre propio muy conocido.','NH3: amoniaco o trihidruro de nitrógeno.'),
+ N('PH3',['fosfano','trihidruro de fósforo'],'Es el análogo del amoniaco con fósforo. Ya no se usa el nombre «fosfina».','PH3: fosfano o trihidruro de fósforo.'),
+ N('CH4',['metano','tetrahidruro de carbono'],'Es el hidrocarburo más sencillo.','CH4: metano o tetrahidruro de carbono.'),
+ C('Nombra HCl en estado gaseoso',['cloruro de hidrógeno'],'El H va a la izquierda porque es del grupo 17. ¿Cómo se nombra el cloro como anión?','HCl gas: cloruro de hidrógeno. «Ácido clorhídrico» es solo para la disolución acuosa.'),
+ C('Nombra H2S en estado gaseoso',['sulfuro de hidrógeno','sulfuro de dihidrógeno'],'Grupo 16: el hidrógeno va primero y el azufre termina en -uro.','H2S gas: sulfuro de hidrógeno (o sulfuro de dihidrógeno).'),
+ F('bromuro de hidrógeno',['HBr'],'Hidrógeno a la izquierda y bromo a la derecha.','HBr: H (+1) con Br (−1).'),
+ F('seleniuro (selenuro) de hidrógeno',['H2Se'],'El selenio es del grupo 16 y actúa con −2: ¿cuántos H hacen falta?','Se (−2) pide dos H (+1): H2Se.'),
+ F('silano',['SiH4'],'El silicio es del grupo 14 y actúa con +4 frente al H.','Silano: SiH4.'),
+ C('¿Cómo se llama el HF disuelto en agua?',['ácido fluorhídrico'],'Cuando el haluro está en disolución acuosa se usa el nombre con «ácido … hídrico».','HF en disolución acuosa: ácido fluorhídrico.')]},
+
+{n:'Oxoácidos',sym:'H<sub>2</sub>SO<sub>4</sub>',mh:176,norma:'Nomenclatura tradicional: ácido sulfúrico',
+ rule:['Memoriza el ácido de mayor número de oxidación de cada serie: HNO3 nítrico, H3PO4 fosfórico, H2SO4 sulfúrico, HClO4 perclórico. Además H2CO3 carbónico, H3BO3 bórico y H4SiO4 silícico.','El resto de la serie sale restando un oxígeno cada vez: HClO4 perclórico, HClO3 clórico, HClO2 cloroso, HClO hipocloroso. H2SO4 sulfúrico, H2SO3 sulfuroso, H2SO2 hiposulfuroso. HNO3 nítrico, HNO2 nitroso, HNO hiponitroso.','Nombres: mayor número de oxidación, -ico; el siguiente, -oso; el siguiente, hipo- -oso; per- -ico si hay cuatro.','Metales con estado alto: H2CrO4 crómico, H2Cr2O7 dicrómico, H2MnO4 mangánico, HMnO4 permangánico.'],
+ items:[
+ N('H2SO4',['ácido sulfúrico'],'Es el ácido del azufre con el número más alto (+6). ¿Qué terminación le toca?','H2SO4 es el ácido del azufre (+6): terminación -ico, ácido sulfúrico.'),
+ N('HNO2',['ácido nitroso'],'El nitrógeno aquí tiene +3, un escalón por debajo del ácido nítrico (HNO3).','HNO3 es nítrico; con un oxígeno menos, HNO2, es nitroso.'),
+ N('H3PO4',['ácido fosfórico','ácido ortofosfórico'],'Es el ácido del fósforo con +5, como el nítrico lo es del nitrógeno.','H3PO4: ácido (orto)fosfórico.'),
+ N('HClO',['ácido hipocloroso'],'Es el del cloro con el número más bajo (+1): lleva hipo- y -oso.','Serie del cloro: HClO4 perclórico, HClO3 clórico, HClO2 cloroso, HClO hipocloroso.'),
+ N('H2CO3',['ácido carbónico'],'Es el ácido del carbono(IV): conviene saberlo de memoria.','H2CO3: ácido carbónico.'),
+ N('HClO4',['ácido perclórico'],'Es el del cloro(VII), el más alto de la serie: lleva per-.','HClO4: ácido perclórico.'),
+ F('ácido sulfuroso',['H2SO3'],'Parte del sulfúrico (H2SO4) y quítale un oxígeno.','Sulfúrico H2SO4 pierde un O y pasa a sulfuroso H2SO3.'),
+ F('ácido clórico',['HClO3'],'Parte del perclórico (HClO4) y quítale un oxígeno.','HClO4 (perclórico) menos un O es HClO3 (clórico).'),
+ F('ácido bórico',['H3BO3'],'Boro +3 con tres oxígenos (−6): ¿cuántos H faltan para carga cero?','B (+3) con tres O (−6): faltan tres H, H3BO3.'),
+ F('ácido dicrómico',['H2Cr2O7'],'Son dos cromos (+6): +12. Con siete oxígenos suman −14. ¿Cuántos H hacen falta?','Dos Cr (+12) y siete O (−14): faltan dos H, H2Cr2O7.'),
+ F('ácido permangánico',['HMnO4'],'Mn (+7) con cuatro O (−8): ¿cuántos H faltan?','Mn (+7) y cuatro O (−8): falta un H, HMnO4.')]},
+
+{n:'Sales binarias',sym:'NaCl',mh:200,norma:NB,
+ rule:['Fórmula: MxXy. El no metal usa su número de oxidación negativo (halógenos −1; S, Se, Te −2; N, P, As, Sb −3; C, Si −4).','El más electronegativo va a la derecha y acaba en -uro: cloruro, sulfuro, nitruro, carburo, fosfuro…','Stock: cloruro de hierro(III). Prefijos: tricloruro de hierro.','También son sales binarias las de dos no metales (CCl4, PCl5) y las del ion amonio (NH4Cl, cloruro de amonio).'],
+ items:[
+ N('FeCl3',['cloruro de hierro(III)','tricloruro de hierro'],'Tres cloruros (−1 cada uno): ¿qué número de oxidación necesita el hierro?','Tres Cl (−1) → Fe (+3): cloruro de hierro(III) o tricloruro de hierro.'),
+ N('Cu2S',['sulfuro de cobre(I)','sulfuro de dicobre'],'El sulfuro vale −2; con dos cobres, ¿cuánto vale cada uno?','S (−2) compensado por dos Cu (+1): sulfuro de cobre(I) o sulfuro de dicobre.'),
+ N('Mg3N2',['nitruro de magnesio','dinitruro de trimagnesio'],'El magnesio solo tiene +2. ¿Cómo se llama el nitrógeno con carga negativa?','Tres Mg (+2) y dos N (−3): nitruro de magnesio (dinitruro de trimagnesio con prefijos).'),
+ N('CCl4',['cloruro de carbono(IV)','tetracloruro de carbono'],'Son dos no metales: el más electronegativo (Cl) acaba en -uro.','Cuatro Cl (−1) → C (+4): cloruro de carbono(IV) o tetracloruro de carbono.'),
+ F('sulfuro de aluminio',['Al2S3'],'Aluminio (+3) y azufre (−2): cruza los números.','Al (+3) y S (−2) dan Al2S3.'),
+ F('bromuro de cobalto(III)',['CoBr3'],'El bromuro vale −1 y el cobalto +3: ¿cuántos bromuros?','Co (+3) con tres Br (−1): CoBr3.'),
+ F('pentacloruro de fósforo (o cloruro de fósforo(V))',['PCl5'],'Penta- indica cinco cloros.','Un fósforo y cinco cloros: PCl5.'),
+ F('cloruro de amonio',['NH4Cl'],'El ion amonio es NH4 (carga +1) y el cloruro es Cl (−1).','NH4 (+1) y Cl (−1): NH4Cl.')]},
+
+{n:'Oxisales neutras',sym:'CaCO<sub>3</sub>',mh:228,norma:'Tradicional-Stock: sulfato de hierro(III)',
+ rule:['Una oxisal neutra es un ácido cuyos H se han sustituido todos por un metal.','El anión sale del ácido quitando todos los H: -oso pasa a -ito y -ico pasa a -ato (sulfuroso → sulfito, sulfúrico → sulfato).','La valencia del anión es el número de H que se han quitado.','Nombre: «sulfato de + metal», con número romano si el metal tiene varios (sulfato de hierro(III)). Los nombres antiguos «férrico», «potásico»… no valen.'],
+ items:[
+ N('CaCO3',['carbonato de calcio'],'Es una sal del ácido carbónico (H2CO3). Si el ácido acaba en -ico, ¿cómo acaba el anión?','H2CO3 (carbónico) pierde sus dos H y da carbonato; con calcio: carbonato de calcio.'),
+ N('Fe2(SO4)3',['sulfato de hierro(III)'],'Tres sulfatos (carga −2 cada uno) suman −6: ¿cuánto vale cada hierro?','Tres SO4 (−2) = −6, repartidos entre dos Fe: Fe (+3). Sulfato de hierro(III).'),
+ N('NaClO',['hipoclorito de sodio'],'Viene del ácido hipocloroso (HClO). ¿En qué se convierte -oso?','HClO es hipocloroso; -oso pasa a -ito: hipoclorito de sodio.'),
+ N('Cu(NO2)2',['nitrito de cobre(II)'],'NO2 viene del ácido nitroso. Dos nitritos (−1 cada uno): ¿cuánto vale el cobre?','NO2 es el anión nitrito; dos de ellos (−2) → Cu (+2): nitrito de cobre(II).'),
+ F('fosfato de calcio',['Ca3(PO4)2'],'Fosfato PO4 (−3) y calcio (+2): cruza los números y pon paréntesis al anión.','Ca (+2) y PO4 (−3): Ca3(PO4)2.'),
+ F('sulfato de amonio',['(NH4)2SO4'],'Amonio NH4 (+1) y sulfato SO4 (−2): ¿cuántos amonios hacen falta?','Dos NH4 (+1) compensan un SO4 (−2): (NH4)2SO4.'),
+ F('dicromato de potasio',['K2Cr2O7'],'El anión dicromato es Cr2O7 (−2) y el potasio es +1.','Dos K (+1) con Cr2O7 (−2): K2Cr2O7.'),
+ F('permanganato de potasio',['KMnO4'],'El permanganato viene del ácido permangánico (HMnO4): quítale el H.','HMnO4 sin H es MnO4 (−1); con K (+1): KMnO4.')]},
+
+{n:'Sales ácidas',sym:'NaHCO<sub>3</sub>',mh:258,norma:'Tradicional-Stock: hidrogenocarbonato de sodio',
+ rule:['Solo pueden formar sales ácidas los ácidos con más de un H. En ellas se sustituyen solo algunos H.','El anión conserva los H no sustituidos: hidrogeno-, dihidrogeno-, trihidrogeno- (HCO3, H2PO4, HPO4…).','Nombre: «hidrogenocarbonato de sodio», «dihidrogenofosfato de potasio».','El prefijo mono- solo se usa para evitar ambigüedad (el H3PO4 puede dar monohidrogenofosfato).','«Bicarbonato» y «bisulfato» no son nombres válidos.'],
+ items:[
+ N('NaHCO3',['hidrogenocarbonato de sodio'],'Hay un H que se conserva del ácido carbónico. ¿Cómo se indica un hidrógeno en el anión?','HCO3 es hidrogenocarbonato (no «bicarbonato»).'),
+ N('Ca(HSO4)2',['hidrogenosulfato de calcio'],'El anión es HSO4: viene del sulfúrico y conserva un H.','HSO4 es hidrogenosulfato; con calcio: hidrogenosulfato de calcio.'),
+ N('KH2PO4',['dihidrogenofosfato de potasio'],'El anión H2PO4 conserva dos H.','H2PO4 es dihidrogenofosfato: dihidrogenofosfato de potasio.'),
+ N('Zn(HS)2',['hidrogenosulfuro de cinc','hidrogenosulfuro de zinc'],'Viene del sulfuro de hidrógeno; el anión es HS.','HS es hidrogenosulfuro; con cinc (+2): hidrogenosulfuro de cinc.'),
+ N('Na2HPO4',['hidrogenofosfato de sodio','monohidrogenofosfato de sodio'],'El anión HPO4 conserva un solo H (el H3PO4 podría conservar dos).','HPO4 es hidrogenofosfato (o monohidrogenofosfato, para distinguirlo del H2PO4).'),
+ F('hidrogenosulfito de hierro(III)',['Fe(HSO3)3'],'El anión hidrogenosulfito es HSO3 (−1). ¿Cuántos hacen falta con hierro (+3)?','Fe (+3) con tres HSO3 (−1): Fe(HSO3)3.'),
+ F('dihidrogenofosfato de bario',['Ba(H2PO4)2'],'El anión H2PO4 vale −1 y el bario +2.','Ba (+2) con dos H2PO4 (−1): Ba(H2PO4)2.'),
+ F('hidrogenosulfato de potasio',['KHSO4'],'HSO4 vale −1 y el potasio +1.','K (+1) con un HSO4 (−1): KHSO4.'),
+ F('hidrogenocarbonato de aluminio',['Al(HCO3)3'],'HCO3 vale −1 y el aluminio +3: ¿cuántos hacen falta?','Al (+3) con tres HCO3 (−1): Al(HCO3)3.')]},
+
+{n:'Repaso mixto (modo examen)',sym:'Σ',mh:290,exam:true,norma:'Según el tipo de compuesto',
+ rule:['Modo examen: diez ejercicios seguidos, tomados al azar de todos los temas, sin pistas ni correcciones. Al final ves la nota y la corrección de cada uno.','Recuerda el orden: número de oxidación, cruzar, simplificar y comprobar cargas.','Binarios, óxidos, hidróxidos e hidruros: Stock o prefijos. Oxoácidos: tradicional. Oxisales y sales ácidas: tradicional-Stock.'],
+ items:[
+ N('K2O',['óxido de potasio','óxido de dipotasio','monóxido de dipotasio'],'','K (+1) y O (−2): óxido de potasio (óxido de dipotasio con prefijos).'),
+ N('Al(OH)3',['hidróxido de aluminio','trihidróxido de aluminio'],'','Al (+3) con tres OH: hidróxido de aluminio o trihidróxido de aluminio.'),
+ N('H2SO3',['ácido sulfuroso'],'','H2SO3 es el sulfuroso: un O menos que el sulfúrico.'),
+ N('Cu(NO3)2',['nitrato de cobre(II)'],'','Dos NO3 (−1) → Cu (+2): nitrato de cobre(II).'),
+ N('MgH2',['hidruro de magnesio','dihidruro de magnesio'],'','Mg (+2) con dos H (−1): hidruro de magnesio.'),
+ F('hidrogenosulfato de sodio',['NaHSO4'],'','Na (+1) con HSO4 (−1): NaHSO4.'),
+ F('cloruro de plomo(IV)',['PbCl4'],'','Pb (+4) con cuatro Cl (−1): PbCl4.'),
+ F('peróxido de calcio',['CaO2'],'','Ca (+2) con el grupo O2 (−2): CaO2.'),
+ F('ácido nítrico',['HNO3'],'','Ácido nítrico: HNO3, el del nitrógeno (+5).'),
+ F('carbonato de plomo(II)',['PbCO3'],'','Pb (+2) con CO3 (−2): PbCO3.')]}
+];
+
+/* ---- Ejercicios ampliados ---- */
+MODS[0].items.push(
+ Q('¿Con qué números de oxidación actúa el cobre?',[1,2],'+1 y +2','Es del grupo 11: además del número del grupo tiene otro.','Cobre: +1 y +2. Por eso hay que indicarlo: óxido de cobre(I) y óxido de cobre(II).'),
+ Q('¿Con qué números de oxidación actúa el oro?',[1,3],'+1 y +3','Es del grupo 11, como el cobre, pero su segundo número es distinto.','Oro: +1 y +3.'),
+ Q('¿Con qué números de oxidación actúa el mercurio?',[1,2],'+1 y +2','Es del grupo 12, pero es la excepción de su grupo.','Mercurio: +1 y +2, a diferencia del cinc, que solo tiene +2.'),
+ Q('¿Cuál es el único número de oxidación del cinc?',[2],'+2','Es del grupo 12 y no se comporta como su vecino el mercurio.','Cinc: solo +2, así que no lleva número romano (óxido de cinc).'),
+ Q('¿Con qué número de oxidación actúa el oxígeno en el H2O2?',[-1],'−1','En los peróxidos el oxígeno no tiene su valor habitual (−2). Fíjate en el signo.','En los peróxidos, cada oxígeno es −1 (el grupo O2 vale −2).'),
+ Q('¿Con qué número de oxidación negativo actúa el fósforo?',[-3],'−3','Los elementos del grupo 15 comparten el mismo número negativo.','N, P, As y Sb actúan con −3 en fosfuros, nitruros, etc.'),
+ Q('¿Con qué números de oxidación positivos actúa el carbono?',[2,4],'+2 y +4','Los carbonoideos solo tienen dos números positivos (el silicio solo uno).','C: +2 y +4 (CO y CO2). El silicio solo tiene +4.')
+);
+MODS[1].items.push(
+ N('N2O3',['óxido de nitrógeno(III)','trióxido de dinitrógeno'],'Tres O suman −6, repartidos entre dos N: ¿cuánto vale cada nitrógeno?','3 × (−2) = −6, luego cada N es +3: óxido de nitrógeno(III) o trióxido de dinitrógeno.'),
+ N('Al2O3',['óxido de aluminio','trióxido de dialuminio'],'El aluminio es del grupo 13: ¿tiene uno o varios números de oxidación?','Al (+3) solo tiene un número: óxido de aluminio. Con prefijos: trióxido de dialuminio.'),
+ N('PbO2',['óxido de plomo(IV)','dióxido de plomo'],'Dos O suman −4 y hay un solo plomo.','2 × (−2) = −4, luego Pb (+4): óxido de plomo(IV) o dióxido de plomo.'),
+ N('Cr2O3',['óxido de cromo(III)','trióxido de dicromo'],'Tres O (−6) entre dos cromos: ¿cuánto vale cada uno?','Cr (+3): óxido de cromo(III) o trióxido de dicromo.'),
+ N('Ag2O',['óxido de plata','óxido de diplata','monóxido de diplata'],'La plata solo tiene un número de oxidación.','Ag (+1): óxido de plata; con prefijos, óxido de diplata.'),
+ N('CO2',['óxido de carbono(IV)','dióxido de carbono'],'Dos O suman −4. ¿Qué número de oxidación necesita el carbono?','C (+4): óxido de carbono(IV) o dióxido de carbono.'),
+ N('CO',['óxido de carbono(II)','monóxido de carbono','óxido de carbono'],'Un O (−2) y un C: ¿qué número tiene el carbono aquí?','C (+2): óxido de carbono(II). Con prefijos se suele decir monóxido de carbono para enfatizarlo.'),
+ N('N2O4',['tetraóxido de dinitrógeno'],'En Stock N2O4 y NO2 serían ambos «óxido de nitrógeno(IV)». Aquí usa prefijos para distinguirlos.','Con prefijos: tetraóxido de dinitrógeno (N2O4), frente a dióxido de nitrógeno (NO2).'),
+ F('óxido de estaño(II)',['SnO'],'Cruza el 2 del estaño con el 2 del oxígeno y simplifica.','Sn (+2) y O (−2): Sn2O2, que se simplifica a SnO.'),
+ F('óxido de cobalto(III)',['Co2O3'],'El 3 del cobalto pasa al oxígeno y el 2 del oxígeno al cobalto.','Co (+3) y O (−2): Co2O3.'),
+ F('dióxido de titanio',['TiO2'],'Los prefijos dan los subíndices: di- = 2 oxígenos.','Un titanio y dos oxígenos: TiO2.'),
+ F('óxido de oro(III)',['Au2O3'],'Cruza el 3 del oro con el 2 del oxígeno.','Au (+3) y O (−2): Au2O3.'),
+ F('óxido de cadmio',['CdO'],'El cadmio solo actúa con +2. Cruza y simplifica.','Cd (+2) y O (−2): Cd2O2, que se simplifica a CdO.')
+);
+MODS[2].items.push(
+ N('K2O2',['peróxido de potasio','dióxido de dipotasio'],'El grupo O2 vale −2: ¿cuántos potasios (+1) hacen falta?','K2O2 contiene el grupo peroxo: peróxido de potasio o dióxido de dipotasio.'),
+ N('CaO2',['peróxido de calcio','dióxido de calcio'],'Un calcio (+2) y un grupo O2 (−2).','CaO2: peróxido de calcio o dióxido de calcio.'),
+ N('MgO2',['peróxido de magnesio','dióxido de magnesio'],'Un magnesio (+2) y un grupo O2 (−2).','MgO2: peróxido de magnesio o dióxido de magnesio.'),
+ F('peróxido de rubidio',['Rb2O2'],'Rubidio +1 y el grupo O2 (−2): el O2 no se simplifica.','Dos Rb (+1) y O2 (−2): Rb2O2.'),
+ F('dióxido de cinc',['ZnO2'],'El cinc es +2 y el grupo O2 es −2. Dióxido indica dos oxígenos.','Un Zn (+2) y O2 (−2): ZnO2.'),
+ T('¿Existe el peróxido de níquel?','no','No','El níquel tiene +2 y +3. ¿Cumple la condición de los peróxidos?','No: solo forman peróxidos los metales con únicamente +1, +2 o ambos. El níquel tiene +3.')
+);
+MODS[3].items.push(
+ N('NaOH',['hidróxido de sodio'],'El sodio solo tiene un número de oxidación y hay un único OH.','Na (+1) con un OH (−1): hidróxido de sodio.'),
+ N('Al(OH)3',['hidróxido de aluminio','trihidróxido de aluminio'],'Tres OH (−1 cada uno): ¿el aluminio tiene otros números de oxidación?','Al (+3): hidróxido de aluminio o trihidróxido de aluminio.'),
+ N('Mn(OH)2',['hidróxido de manganeso(II)','dihidróxido de manganeso'],'Dos OH suman −2. El manganeso tiene muchos números de oxidación.','Mn (+2): hidróxido de manganeso(II) o dihidróxido de manganeso.'),
+ N('Ni(OH)3',['hidróxido de níquel(III)','trihidróxido de níquel'],'Tres OH suman −3.','Ni (+3): hidróxido de níquel(III) o trihidróxido de níquel.'),
+ N('Zn(OH)2',['hidróxido de cinc','dihidróxido de cinc'],'El cinc solo tiene +2.','Zn (+2) con dos OH: hidróxido de cinc.'),
+ N('NH4OH',['hidróxido de amonio'],'El catión NH4 tiene carga +1 y se nombra «amonio».','NH4 (+1) con un OH (−1): hidróxido de amonio.'),
+ F('hidróxido de litio',['LiOH'],'Litio +1 y OH −1: un solo OH, sin paréntesis.','Li (+1) con un OH: LiOH.'),
+ F('hidróxido de estaño(IV)',['Sn(OH)4'],'El número romano indica cuántos OH hay.','Sn (+4) con cuatro OH: Sn(OH)4.'),
+ F('hidróxido de cobalto(III)',['Co(OH)3'],'Tres OH, con paréntesis.','Co (+3): Co(OH)3.'),
+ F('hidróxido de plata',['AgOH'],'La plata solo actúa con +1.','Ag (+1) con un OH: AgOH.'),
+ F('dihidróxido de plomo',['Pb(OH)2'],'Di- indica dos grupos OH; van entre paréntesis.','Un plomo con dos OH: Pb(OH)2.')
+);
+MODS[4].items.push(
+ N('KH',['hidruro de potasio'],'El potasio solo tiene +1.','K (+1) y H (−1): hidruro de potasio.'),
+ N('MnH3',['hidruro de manganeso(III)','trihidruro de manganeso'],'Tres H (−1) suman −3.','Mn (+3): hidruro de manganeso(III) o trihidruro de manganeso.'),
+ N('PbH4',['hidruro de plomo(IV)','tetrahidruro de plomo'],'Cuatro H suman −4.','Pb (+4): hidruro de plomo(IV) o tetrahidruro de plomo.'),
+ N('LiH',['hidruro de litio'],'El litio solo tiene +1.','Li (+1) y H (−1): hidruro de litio.'),
+ N('CuH2',['hidruro de cobre(II)','dihidruro de cobre'],'Dos H suman −2. El cobre tiene más de un número.','Cu (+2): hidruro de cobre(II) o dihidruro de cobre.'),
+ N('ZnH2',['hidruro de cinc','dihidruro de cinc'],'El cinc solo tiene +2.','Zn (+2) con dos H: hidruro de cinc.'),
+ F('hidruro de bario',['BaH2'],'El bario (grupo 2) es +2: ¿cuántos H?','Ba (+2) con dos H: BaH2.'),
+ F('hidruro de níquel(III)',['NiH3'],'El número romano es el número de H.','Ni (+3) con tres H: NiH3.'),
+ F('hidruro de plata',['AgH'],'La plata es +1.','Ag (+1) con un H: AgH.'),
+ F('dihidruro de estroncio',['SrH2'],'Di- indica dos hidrógenos.','Un estroncio y dos H: SrH2.'),
+ F('hidruro de mercurio(I)',['HgH'],'Mercurio(I): un solo H, y el H va a la derecha.','Hg (+1) con un H: HgH.')
+);
+MODS[5].items.push(
+ C('Nombra AsH3',['arsano','trihidruro de arsénico'],'Es el análogo del amoniaco con arsénico. Ya no se usa «arsina».','AsH3: arsano o trihidruro de arsénico.'),
+ C('Nombra BH3',['borano','trihidruro de boro'],'Es un hidruro del boro, del grupo 13.','BH3: borano o trihidruro de boro.'),
+ C('Nombra HI en estado gaseoso',['yoduro de hidrógeno'],'Grupo 17: el H va a la izquierda y el yodo acaba en -uro.','HI gas: yoduro de hidrógeno.'),
+ C('Nombra HF en estado gaseoso',['fluoruro de hidrógeno'],'Grupo 17: el flúor como anión acaba en -uro.','HF gas: fluoruro de hidrógeno.'),
+ C('Nombra H2Te en estado gaseoso',['telururo de hidrógeno','telururo de dihidrógeno'],'Grupo 16: el teluro como anión es «telururo».','H2Te gas: telururo de hidrógeno o telururo de dihidrógeno.'),
+ C('Nombra HCN en estado gaseoso',['cianuro de hidrógeno'],'El grupo CN actúa como un halógeno: el anión es «cianuro».','HCN gas: cianuro de hidrógeno.'),
+ C('¿Cómo se llama el HCl disuelto en agua?',['ácido clorhídrico'],'En disolución acuosa se usa «ácido … hídrico».','HCl en disolución acuosa: ácido clorhídrico.'),
+ C('¿Cómo se llama el H2S disuelto en agua?',['ácido sulfhídrico'],'En disolución acuosa se usa «ácido … hídrico» con la raíz del azufre.','H2S en disolución acuosa: ácido sulfhídrico.'),
+ F('yoduro de hidrógeno',['HI'],'Hidrógeno a la izquierda y yodo a la derecha.','HI: H (+1) con I (−1).'),
+ F('amoniaco',['NH3'],'Es un hidruro del nitrógeno (grupo 15): N primero, H después.','Amoniaco: NH3.'),
+ F('metano',['CH4'],'El carbono es del grupo 14 y actúa con +4 frente al H.','Metano: CH4.'),
+ F('fosfano',['PH3'],'Es el análogo del amoniaco con fósforo.','Fosfano: PH3.'),
+ F('cloruro de hidrógeno',['HCl'],'Grupo 17: el H va a la izquierda.','Cloruro de hidrógeno: HCl.'),
+ F('sulfuro de dihidrógeno',['H2S'],'Di- indica dos hidrógenos y el H va a la izquierda.','Dos H y un S: H2S.')
+);
+MODS[6].items.push(
+ N('HNO3',['ácido nítrico'],'Es el ácido del nitrógeno con el número más alto (+5).','HNO3: ácido nítrico.'),
+ N('H3BO3',['ácido bórico','ácido ortobórico'],'Es el ácido del boro: se aprende de memoria.','H3BO3: ácido (orto)bórico.'),
+ N('HClO2',['ácido cloroso'],'Es el del cloro(III): un escalón por debajo del clórico.','Serie del cloro: HClO4, HClO3, HClO2 (cloroso), HClO.'),
+ N('H3PO3',['ácido fosforoso'],'Es el del fósforo con +3, un escalón por debajo del fosfórico.','H3PO4 es fosfórico; con un O menos, H3PO3, es fosforoso.'),
+ N('H4SiO4',['ácido silícico','ácido ortosilícico'],'Es el ácido del silicio, que solo tiene +4.','H4SiO4: ácido (orto)silícico.'),
+ N('H2CrO4',['ácido crómico'],'Es el ácido del cromo con +6.','H2CrO4: ácido crómico.'),
+ F('ácido hiposulfuroso',['H2SO2'],'Es el escalón más bajo de la serie del azufre: dos oxígenos menos que el sulfúrico.','H2SO4 → H2SO3 → H2SO2 (hiposulfuroso).'),
+ F('ácido hiponitroso',['HNO'],'Es el ácido del nitrógeno con +1, dos oxígenos menos que el nitroso.','HNO3 → HNO2 → HNO (hiponitroso).'),
+ F('ácido mangánico',['H2MnO4'],'Mn (+6) con cuatro O (−8): ¿cuántos H faltan?','Mn (+6) y cuatro O (−8): faltan dos H, H2MnO4.'),
+ F('ácido fosfórico',['H3PO4'],'Es el del fósforo con +5: se parece al nítrico pero con tres H.','Ácido (orto)fosfórico: H3PO4.'),
+ F('ácido nítrico',['HNO3'],'Es el del nitrógeno con el número más alto (+5).','Ácido nítrico: HNO3.'),
+ F('ácido hipocloroso',['HClO'],'Hipo- y -oso: el escalón más bajo del cloro (+1).','Ácido hipocloroso: HClO.'),
+ F('ácido carbónico',['H2CO3'],'Carbono (+4) con tres O (−6): ¿cuántos H?','C (+4) y tres O (−6): faltan dos H, H2CO3.')
+);
+MODS[7].items.push(
+ N('CaF2',['fluoruro de calcio','difluoruro de calcio'],'El calcio solo tiene +2.','Ca (+2) con dos F (−1): fluoruro de calcio o difluoruro de calcio.'),
+ N('PbI2',['yoduro de plomo(II)','diyoduro de plomo'],'Dos yoduros (−1 cada uno): ¿qué número tiene el plomo?','Pb (+2): yoduro de plomo(II) o diyoduro de plomo.'),
+ N('Ni2S3',['sulfuro de níquel(III)','trisulfuro de diníquel'],'Tres S (−2) suman −6, entre dos Ni.','Cada Ni es +3: sulfuro de níquel(III) o trisulfuro de diníquel.'),
+ N('PCl3',['cloruro de fósforo(III)','tricloruro de fósforo'],'Tres cloruros (−1): ¿qué número tiene el fósforo?','P (+3): cloruro de fósforo(III) o tricloruro de fósforo.'),
+ N('CS2',['sulfuro de carbono(IV)','disulfuro de carbono'],'Dos S (−2) suman −4. ¿Qué número tiene el carbono?','C (+4): sulfuro de carbono(IV) o disulfuro de carbono.'),
+ N('Ca3P2',['fosfuro de calcio','difosfuro de tricalcio'],'El calcio solo tiene +2. El fósforo actúa con su número negativo.','Tres Ca (+2) y dos P (−3): fosfuro de calcio o difosfuro de tricalcio.'),
+ F('cloruro de cobre(II)',['CuCl2'],'Cl es −1 y el cobre +2: ¿cuántos cloruros?','Cu (+2) con dos Cl (−1): CuCl2.'),
+ F('yoduro de potasio',['KI'],'El potasio es +1 y el yoduro −1.','K (+1) con I (−1): KI.'),
+ F('nitruro de aluminio',['AlN'],'Al (+3) y N (−3): se compensan uno a uno.','Al (+3) y N (−3): AlN.'),
+ F('sulfuro de hierro(II)',['FeS'],'Fe (+2) y S (−2): cruza y simplifica.','Fe (+2) y S (−2): Fe2S2, que se simplifica a FeS.'),
+ F('bromuro de estaño(IV)',['SnBr4'],'El bromuro es −1 y el estaño +4.','Sn (+4) con cuatro Br (−1): SnBr4.')
+);
+MODS[8].items.push(
+ N('Li2CO3',['carbonato de litio'],'Es una sal del ácido carbónico.','Li2CO3: carbonato de litio.'),
+ N('Na2SO3',['sulfito de sodio'],'SO3 viene del ácido sulfuroso (-oso pasa a -ito).','Sulfuroso → sulfito: sulfito de sodio.'),
+ N('Ca(ClO2)2',['clorito de calcio'],'ClO2 viene del ácido cloroso.','Cloroso → clorito: clorito de calcio.'),
+ N('AlPO4',['fosfato de aluminio'],'PO4 viene del ácido fosfórico (-ico pasa a -ato).','Fosfórico → fosfato: fosfato de aluminio.'),
+ N('CuSO4',['sulfato de cobre(II)'],'Un sulfato vale −2. El cobre tiene más de un número.','Cu (+2): sulfato de cobre(II).'),
+ N('Hg(NO3)2',['nitrato de mercurio(II)'],'Dos nitratos (−1 cada uno): ¿cuánto vale el mercurio?','Hg (+2): nitrato de mercurio(II).'),
+ N('K2CrO4',['cromato de potasio'],'CrO4 viene del ácido crómico.','Crómico → cromato: cromato de potasio.'),
+ N('Fe(ClO4)3',['perclorato de hierro(III)'],'Tres percloratos (−1 cada uno): ¿cuánto vale el hierro?','Fe (+3): perclorato de hierro(III).'),
+ F('nitrato de plata',['AgNO3'],'La plata es +1 y el nitrato −1.','Ag (+1) con NO3 (−1): AgNO3.'),
+ F('sulfito de aluminio',['Al2(SO3)3'],'Sulfito SO3 (−2) y aluminio (+3): cruza y pon paréntesis al anión.','Al (+3) y SO3 (−2): Al2(SO3)3.'),
+ F('hipoclorito de calcio',['Ca(ClO)2'],'Hipoclorito ClO (−1) y calcio (+2): ¿cuántos hipocloritos?','Ca (+2) con dos ClO (−1): Ca(ClO)2.'),
+ F('clorato de potasio',['KClO3'],'Clorato ClO3 (−1) y potasio (+1).','K (+1) con ClO3 (−1): KClO3.'),
+ F('fosfato de hierro(III)',['FePO4'],'PO4 vale −3 y el hierro +3: se compensan.','Fe (+3) y PO4 (−3): FePO4.'),
+ F('cromato de plata',['Ag2CrO4'],'Cromato CrO4 (−2) y plata (+1).','Dos Ag (+1) con CrO4 (−2): Ag2CrO4.')
+);
+MODS[9].items.push(
+ N('Pb(HS)2',['hidrogenosulfuro de plomo(II)'],'Dos aniones HS (−1 cada uno): ¿cuánto vale el plomo?','Pb (+2): hidrogenosulfuro de plomo(II).'),
+ N('Ca(HCO3)2',['hidrogenocarbonato de calcio'],'HCO3 conserva un H del ácido carbónico.','Ca (+2) con dos HCO3: hidrogenocarbonato de calcio.'),
+ N('NaHSO3',['hidrogenosulfito de sodio'],'HSO3 viene del ácido sulfuroso y conserva un H.','HSO3: hidrogenosulfito. Con sodio: hidrogenosulfito de sodio.'),
+ N('Fe(H2PO4)3',['dihidrogenofosfato de hierro(III)'],'H2PO4 conserva dos H. Tres aniones (−1) → ¿hierro?','Fe (+3): dihidrogenofosfato de hierro(III).'),
+ N('Mg(HSO4)2',['hidrogenosulfato de magnesio'],'HSO4 conserva un H del ácido sulfúrico.','Mg (+2) con dos HSO4: hidrogenosulfato de magnesio.'),
+ F('hidrogenocarbonato de potasio',['KHCO3'],'HCO3 vale −1 y el potasio +1.','K (+1) con HCO3 (−1): KHCO3.'),
+ F('dihidrogenofosfato de sodio',['NaH2PO4'],'H2PO4 vale −1 y el sodio +1.','Na (+1) con H2PO4 (−1): NaH2PO4.'),
+ F('hidrogenosulfuro de sodio',['NaHS'],'HS vale −1 y el sodio +1.','Na (+1) con HS (−1): NaHS.'),
+ F('hidrogenosulfato de amonio',['NH4HSO4'],'Amonio NH4 (+1) con HSO4 (−1).','NH4 (+1) con HSO4 (−1): NH4HSO4.'),
+ F('hidrogenofosfato de calcio',['CaHPO4'],'HPO4 vale −2 y el calcio +2: se compensan.','Ca (+2) y HPO4 (−2): CaHPO4.')
+);
+MODS[10].items=[];
+
+/* ============ UTILIDADES ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fm=s=>esc(s).replace(/([A-Za-z\)])(\d+)/g,'$1<sub>$2</sub>');
+const strip=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+function normName(s){
+  s=strip(String(s)).toLowerCase().replace(/[\u2212\u2013\u2014]/g,'-').replace(/\s+/g,' ').trim();
+  s=s.replace(/\s*\(\s*/g,'(').replace(/\s*\)\s*/g,')').replace(/\s+(iv|ix|v?i{1,3}|v|x)$/,'($1)');
+  return s.replace(/zinc/g,'cinc').replace(/seleniuro/g,'selenuro').replace(/[.,;:!]+$/,'');
+}
+const normF=s=>String(s).replace(/[\u2080-\u2089]/g,c=>String(c.charCodeAt(0)-0x2080)).replace(/\s+/g,'').replace(/[\[\{]/g,'(').replace(/[\]\}]/g,')');
+const elems=s=>[...new Set(s.match(/[A-Z][a-z]?/g)||[])].sort().join(',');
+const noRoman=s=>s.replace(/\([ivx]+\)/g,'');
+function parseNums(s){
+  s=String(s).replace(/[\u2212\u2013]/g,'-');const set=new Set();
+  s=s.replace(/(\d+)\s*(?:a|hasta)\s*\+?(\d+)/gi,(m,a,b)=>{for(let i=+a;i<=+b;i++)set.add(i);return ' ';});
+  (s.match(/[-+]?\d+/g)||[]).forEach(t=>set.add(parseInt(t,10)));
+  return set;
+}
+const OLD=/\b(ferric|ferros|cupric|cupros|potasic|sodic|calcic|magnesic|aluminic|plumbic|plumbos|argentic|mercuric|mercurios|estannic|estannos|baric|cinquic|litic|amonic|niquelic|cobaltic)[oa]\b/;
+const BIC=/\b(bicarbonato|bisulfato|bisulfito|bifosfato|bisulfuro)\b/;
+const OLDH=/\b(fosfina|arsina|estibina)\b/;
+const solText=it=>it.k==='Q'||it.k==='T'?it.show:it.a[0];
+
+function check(it,raw){
+  const s=String(raw).trim();
+  if(!s) return {ok:false,msg:'Escribe una respuesta antes de comprobar.',empty:true};
+  if(it.k==='Q'){
+    const got=parseNums(s),exp=new Set(it.a);
+    if(got.size===0) return {ok:false,msg:'Responde con números, por ejemplo +2 y +3.'};
+    const same=got.size===exp.size&&[...got].every(x=>exp.has(x));
+    if(same) return {ok:true};
+    const absSame=[...got].map(Math.abs).sort().join()===[...exp].map(Math.abs).sort().join();
+    if(absSame) return {ok:false,msg:'Los valores están bien, pero fíjate en el signo.'};
+    if([...got].every(x=>exp.has(x))) return {ok:false,msg:'Vas bien, pero te falta alguno.'};
+    if([...exp].every(x=>got.has(x))) return {ok:false,msg:'Están todos los que son, pero sobra alguno.'};
+    return {ok:false,msg:'No coincide todavía.'};
+  }
+  if(it.k==='T'){
+    const n=strip(s).toLowerCase();
+    const yes=/^(si|s)\b/.test(n),no=/^no\b/.test(n);
+    if(!yes&&!no) return {ok:false,msg:'Responde sí o no.'};
+    return {ok:(it.a==='no')===no};
+  }
+  if(it.k==='F'){
+    const acc=it.a.map(normF),got=normF(s);
+    if(acc.includes(got)) return {ok:true};
+    if(/[a-z]{3,}\s+de\s+/i.test(s)||/\s/.test(s)&&/[a-z]{4,}/.test(s.replace(/[A-Z][a-z]?/g,''))) return {ok:false,msg:'Aquí hay que escribir una fórmula, no un nombre.'};
+    if(acc.some(a=>a.toLowerCase()===got.toLowerCase())) return {ok:false,msg:'Casi: revisa las mayúsculas y minúsculas de los símbolos (por ejemplo, Co no es lo mismo que CO).'};
+    if(acc.some(a=>elems(a)===elems(got))) return {ok:false,msg:'Los elementos son los correctos. Revisa los subíndices y los paréntesis.'};
+    return {ok:false,msg:'Revisa qué elementos forman el compuesto y en qué orden se escriben.'};
+  }
+  const acc=it.a.map(normName),got=normName(s);
+  if(acc.includes(got)) return {ok:true};
+  const expAcid=it.a.some(a=>/^acido/.test(normName(a)));
+  if(/^[A-Z][A-Za-z0-9()]*$/.test(s)&&!/\s/.test(s)) return {ok:false,msg:'Aquí hay que escribir el nombre, no la fórmula.'};
+  if(OLD.test(got)&&!expAcid) return {ok:false,msg:'Ese nombre con terminación -ico/-oso aplicada al metal está anticuado y no se admite. Indica el número de oxidación con números romanos.'};
+  if(BIC.test(got)) return {ok:false,msg:'«Bicarbonato», «bisulfato»… son nombres antiguos. Usa «hidrogeno…» (hidrogenocarbonato, hidrogenosulfato).'};
+  if(OLDH.test(got)) return {ok:false,msg:'Ese nombre se ha abandonado. Usa fosfano, arsano, estibano o el nombre con prefijos (trihidruro de…).'};
+  if(/^acido \w+hidrico/.test(got)&&!expAcid) return {ok:false,msg:'«Ácido …hídrico» es el nombre de la disolución acuosa. Para el gas se usa «… de hidrógeno».'};
+  const nr=acc.map(noRoman);
+  if(nr.includes(noRoman(got))){
+    return {ok:false,msg:/\([ivx]+\)/.test(got)?'Ojo con el número de oxidación entre paréntesis: no es el correcto.':'Falta el número de oxidación en números romanos, porque este elemento tiene varios.'};
+  }
+  return {ok:false,msg:'Todavía no coincide con lo que buscamos.'};
+}
+
+/* ============ ESTADO ============ */
+let PROG={};
+try{PROG=JSON.parse(localStorage.getItem('molProg1')||'{}')||{};}catch(e){PROG={};}
+const saveProg=()=>{try{localStorage.setItem('molProg1',JSON.stringify(PROG));}catch(e){}};
+let S={};
+
+function order(items){
+  const A=items.filter(i=>i.k==='N'||i.k==='C'),B=items.filter(i=>i.k==='F'),O=items.filter(i=>!'NCF'.includes(i.k)),out=[];
+  while(A.length||B.length){if(A.length)out.push(A.shift());if(B.length)out.push(B.shift());}
+  return out.concat(O);
+}
+MODS.forEach((m,mi)=>{m.items.forEach((it,i)=>{it.id=mi+'-'+i;});});
+
+
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function sample(items,n){
+  const idx=new Map(items.map((it,i)=>[it,i]));
+  const A=shuf(items.filter(i=>i.k==='N'||i.k==='C')),B=shuf(items.filter(i=>i.k==='F')),O=shuf(items.filter(i=>!'NCF'.includes(i.k)));
+  let pick=[];
+  if(!A.length&&!B.length) pick=O.slice(0,n);
+  else{
+    pick=O.slice(0,1);
+    const need=n-pick.length;let a=Math.ceil(need/2),b=need-a;
+    if(A.length<a){b+=a-A.length;a=A.length;}
+    if(B.length<b){a+=b-B.length;b=B.length;}
+    pick=pick.concat(A.slice(0,a),B.slice(0,b));
+  }
+  pick.sort((x,y)=>idx.get(x)-idx.get(y));
+  return order(pick);
+}
+function buildExam(){
+  const pool=MODS.slice(1,10),out=[],used=new Set();
+  pool.forEach((m,i)=>{
+    const dir=i%2===0?(x=>x.k==='N'||x.k==='C'):(x=>x.k==='F');
+    const c=m.items.filter(dir);out.push(c[Math.floor(Math.random()*c.length)]);
+  });
+  out.forEach(x=>used.add(x));
+  const m=pool[Math.floor(Math.random()*pool.length)];
+  const c=m.items.filter(x=>x.k==='F'&&!used.has(x));out.push(c[Math.floor(Math.random()*c.length)]);
+  return shuf(out);
+}
+
+/* ============ VISTAS ============ */
+function home(){
+  S={view:'home'};
+  const tiles=MODS.map((m,i)=>{
+    const best=PROG[i];
+    const cnt=m.exam?'10 al azar de todos los temas':`10 al azar de ${m.items.length}`;
+    const meta=best==null?`${cnt} · sin empezar`:`${cnt} · mejor resultado ${best} %`;
+    return `<li><button class="tile${m.exam?' exam':''}${m.neutral?' neutral':''}" style="--mh:${m.mh}" data-act="open" data-i="${i}">
+      <span class="sym">${m.sym}</span><span class="nm">${esc(m.n)}</span><span class="meta">${meta}</span></button></li>`;
+  }).join('');
+  $('#app').innerHTML=`
+  <div class="brand"><b>JV</b><span>Profe Juanjo Virtual</span></div>
+  <h1>Entrena tu formulación inorgánica</h1>
+  <p class="lead">Elige un tema. Cada vez te propongo 10 ejercicios distintos de un banco amplio, de uno en uno: tú respondes y te corrijo al momento. Si fallas, primero te doy una pista y, si hace falta, te explico el método paso a paso.</p>
+  <details class="norma"><summary>Qué nomenclatura acepto</summary>
+   <ul>
+    <li>Óxidos, peróxidos, hidróxidos, hidruros y sales binarias: Stock (óxido de hierro(III)) o prefijos multiplicadores (trióxido de dihierro).</li>
+    <li>Oxoácidos: nomenclatura tradicional (ácido sulfúrico).</li>
+    <li>Oxisales y sales ácidas: tradicional-Stock (sulfato de hierro(III), hidrogenocarbonato de sodio).</li>
+    <li>Nombres anticuados como «sulfato férrico», «nitrato potásico» o «bicarbonato» no se admiten.</li>
+    <li>Las fórmulas se escriben en texto normal: H2SO4, Fe2(SO4)3.</li>
+   </ul></details>
+  <ul class="grid">${tiles}</ul>
+  <footer>Práctica basada en los criterios de la Ponencia de Química de Andalucía. Tu progreso se guarda solo en este navegador. <button class="btn link" data-act="reset">Borrar mi progreso</button></footer>`;
+  window.scrollTo(0,0);
+}
+
+function start(mi,items,label){
+  const m=MODS[mi];
+  const base=items||(m.exam?buildExam():sample(m.items,10));
+  S={view:'ex',mod:mi,queue:base.slice(),orig:base.slice(),i:0,att:0,hint:false,done:false,res:{},streak:0,again:{},answers:{},retry:label==='retry',noFb:!!m.exam&&label!=='retry'};
+  exercise();
+}
+function pills(){
+  return S.orig.map(it=>{
+    const r=S.res[it.id];const cur=S.queue[S.i]&&S.queue[S.i].id===it.id&&!S.done;
+    return `<span class="pill ${r||''} ${cur&&!r?'cur':''}"></span>`;
+  }).join('');
+}
+function exercise(){
+  const m=MODS[S.mod],it=S.queue[S.i];
+  S.att=0;S.hint=false;S.done=false;
+  const again=S.i>=S.orig.length;
+  let plate;
+  if(it.k==='N') plate=`<p class="lab">Nombra este compuesto</p><div class="big formula">${fm(it.q)}</div>`;
+  else if(it.k==='F') plate=`<p class="lab">Escribe la fórmula de</p><div class="big words">${esc(it.q)}</div>`;
+  else plate=`<p class="lab">${it.k==='Q'?'Números de oxidación':'Pregunta'}</p><div class="big ask">${fm(it.q)}</div>`;
+  const ph=it.k==='F'?'Fórmula, por ejemplo Fe2O3':it.k==='Q'?'Por ejemplo +2 y +3':it.k==='T'?'Sí o no':'Nombre del compuesto';
+  const rules=m.rule.map(r=>`<li>${fm(r)}</li>`).join('');
+  $('#app').innerHTML=`
+  <div class="topbar"><button class="btn" data-act="home">← Temas</button>
+   <span class="count">${again?'Repaso de un fallo':`Ejercicio ${S.i+1} de ${S.orig.length}`}${S.streak>=2?` · racha de ${S.streak}`:''}</span></div>
+  <div class="modhead" style="--mh:${m.mh}"><h2>${esc(m.n)}</h2></div>
+  <div class="pills" aria-hidden="true" style="--mh:${m.mh}">${pills()}</div>
+  <details class="regla" style="--mh:${m.mh}"><summary>Regla clave</summary><ul>${rules}</ul></details>
+  <div class="plate" style="--mh:${m.mh}">${plate}<span class="chip">${esc(m.norma)}</span>${S.noFb?'<span class="chip" style="margin-left:6px">Sin pistas hasta el final</span>':''}</div>
+  <div class="row"><label for="ans" style="position:absolute;left:-9999px">Tu respuesta</label>
+   <input id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${esc(ph)}">
+   <button class="btn primary" id="bcheck" data-act="check">Comprobar</button></div>
+  <div class="tools">
+   <button class="btn ins" data-act="ins" data-c="(" aria-label="Insertar paréntesis de apertura">(</button>
+   <button class="btn ins" data-act="ins" data-c=")" aria-label="Insertar paréntesis de cierre">)</button>
+   ${S.noFb?'':'<button class="btn" id="bhint" data-act="hint">Pista</button><button class="btn" id="bsol" data-act="sol">Mostrar solución</button>'}
+  </div>
+  <div class="fb" id="fb" role="status" aria-live="polite" hidden></div>`;
+  window.scrollTo(0,0);
+  setTimeout(()=>{const a=$('#ans');if(a)a.focus({preventScroll:true});},0);
+}
+function fb(cls,title,html,nextBtn){
+  const el=$('#fb');el.className='fb '+cls;el.hidden=false;
+  el.innerHTML=`<p class="t">${title}</p>${html}${nextBtn?`<div class="go"><button class="btn primary" id="bnext" data-act="next">${nextBtn}</button></div>`:''}`;
+}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const OKS=['¡Correcto!','¡Muy bien!','¡Eso es!','¡Exacto!','¡Bien resuelto!'];
+
+function lock(){
+  const a=$('#ans');if(a)a.disabled=true;
+  ['bcheck','bhint','bsol'].forEach(id=>{const b=$('#'+id);if(b)b.hidden=true;});
+  document.querySelectorAll('.ins').forEach(b=>b.hidden=true);
+}
+function finishItem(status){
+  const it=S.queue[S.i];
+  if(S.i<S.orig.length) S.res[it.id]=status;
+  else S.again[it.id]=status;
+  const pl=document.querySelector('.pills');if(pl)pl.innerHTML=pills();
+}
+function submit(){
+  if(S.done)return;
+  const it=S.queue[S.i],m=MODS[S.mod],inp=$('#ans'),v=inp.value;
+  const r=check(it,v);
+  if(r.empty){fb('warn','Escribe algo primero','<p>Escribe tu respuesta y pulsa Comprobar.</p>');return;}
+  if(S.noFb){
+    S.answers[it.id]=v;
+    S.res[it.id]=r.ok?'first':'fail';
+    S.i++;
+    if(S.i>=S.queue.length) return summary(); else return exercise();
+  }
+  if(r.ok){
+    S.done=true;
+    const status=(S.att===0&&!S.hint)?'first':'help';
+    S.streak++;
+    finishItem(status);
+    const extra=S.streak===3?'<p>Tres seguidas: ¡vas en racha!</p>':'';
+    fb('ok',pick(OKS),`<p>${fm(it.e)}</p>${extra}`,'Siguiente');
+    lock();setTimeout(()=>{const b=$('#bnext');if(b)b.focus();},0);
+    return;
+  }
+  S.att++;S.streak=0;
+  if(S.att===1){
+    S.hint=true;
+    fb('warn',pick(['Buen intento, vamos a afinarlo.','Casi, no te rindas.','Todavía no, pero vas por buen camino.']),`<p>${esc(r.msg)}</p><p><strong>Pista:</strong> ${fm(it.h)}</p><p>Inténtalo de nuevo.</p>`);
+    inp.focus();inp.select();
+  } else reveal(true);
+}
+function reveal(auto){
+  const it=S.queue[S.i];
+  S.done=true;S.streak=0;
+  finishItem('fail');
+  if(S.i<S.orig.length&&!S.again[it.id]){S.queue.push(it);S.again[it.id]='pending';}
+  fb('bad',auto?'No pasa nada: así se aprende. Vamos a verlo paso a paso.':'Vamos a verlo paso a paso.',`<p>Solución: <span class="sol">${fm(solText(it))}</span></p><p>${fm(it.e)}</p><p>Lo repasaremos al final para que te quede.</p>`,'Siguiente');
+  lock();setTimeout(()=>{const b=$('#bnext');if(b)b.focus();},0);
+}
+function next(){
+  S.i++;
+  if(S.i>=S.queue.length) summary(); else exercise();
+}
+function summary(){
+  const m=MODS[S.mod];
+  const total=S.orig.length;
+  let pts=0;S.orig.forEach(it=>{const r=S.res[it.id];pts+=r==='first'?1:r==='help'?.5:0;});
+  const pct=Math.round(pts/total*100);
+  if(!S.retry&&(PROG[S.mod]==null||pct>PROG[S.mod])){PROG[S.mod]=pct;saveProg();}
+  const first=S.orig.filter(it=>S.res[it.id]==='first').length;
+  let msg;
+  if(S.noFb){
+    const g=(first).toFixed(0);
+    msg=`Nota: ${g} sobre ${total}`;
+  } else msg=`${first} de ${total} a la primera`;
+  const tone=pct>=90?'Tema dominado. Puedes pasar al siguiente.':pct>=60?'Vas bien. Repasa los que fallaste y este tema estará listo.':'Toca repasar la regla clave y volver a intentarlo: cada fallo te enseña algo.';
+  const glyph={first:'✓',help:'~',fail:'✗'};
+  const rows=S.orig.map(it=>{
+    const r=S.res[it.id]||'fail';
+    const q=it.k==='N'?fm(it.q):esc(it.q).replace(/([A-Za-z\)])(\d+)/g,'$1<sub>$2</sub>');
+    const yours=S.noFb&&S.answers[it.id]!=null?` Tu respuesta: ${esc(S.answers[it.id]||'(vacía)')}.`:'';
+    const detail=(r==='fail')?`<div class="a">Solución: ${fm(solText(it))}.${yours} ${fm(it.e)}</div>`:(r==='help'?`<div class="a">Con ayuda: ${fm(solText(it))}</div>`:`<div class="a">${fm(solText(it))}</div>`);
+    return `<li><span class="g ${r}" aria-label="${r==='first'?'Acertado a la primera':r==='help'?'Acertado con ayuda':'Fallado'}">${glyph[r]}</span><div><div class="q">${q}</div>${detail}</div></li>`;
+  }).join('');
+  const failed=S.orig.filter(it=>S.res[it.id]!=='first');
+  S.failedIds=failed.map(i=>i.id);
+  const nextMod=S.mod<MODS.length-1;
+  $('#app').innerHTML=`
+  <div class="topbar"><button class="btn" data-act="home">← Temas</button></div>
+  <div class="modhead" style="--mh:${m.mh}"><h2>${esc(m.n)}</h2></div>
+  <div class="score">${msg}</div><p class="lead">${tone}</p>
+  <ul class="rev">${rows}</ul>
+  <div class="actions">
+   ${failed.length?`<button class="btn primary" data-act="retryf">Repetir los que no acerté a la primera</button>`:''}
+   <button class="btn" data-act="again">Repetir el tema con otros ejercicios</button>
+   ${nextMod?`<button class="btn ${failed.length?'':'primary'}" data-act="nextmod">Siguiente tema</button>`:''}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+/* ============ EVENTOS ============ */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b)return;
+  const a=b.dataset.act;
+  if(a==='open')start(+b.dataset.i);
+  else if(a==='home')home();
+  else if(a==='check')submit();
+  else if(a==='next')next();
+  else if(a==='hint'){
+    if(S.done)return;const it=S.queue[S.i];S.hint=true;
+    fb('warn','Pista',`<p>${fm(it.h)}</p>`);$('#ans').focus();
+  } else if(a==='sol'){
+    if(S.done)return;
+    if(S.att===0&&!S.hint){S.hint=true;const it=S.queue[S.i];fb('warn','Primero una pista',`<p>${fm(it.h)}</p><p>Inténtalo. Si sigues atascado, pulsa Mostrar solución otra vez.</p>`);$('#ans').focus();}
+    else reveal(false);
+  } else if(a==='ins'){
+    const i=$('#ans');if(!i||i.disabled)return;const p=i.selectionStart==null?i.value.length:i.selectionStart;
+    i.value=i.value.slice(0,p)+b.dataset.c+i.value.slice(i.selectionEnd==null?p:i.selectionEnd);i.focus();i.setSelectionRange(p+1,p+1);
+  } else if(a==='again')start(S.mod);
+  else if(a==='retryf'){const ids=new Set(S.failedIds);const its=S.orig.filter(x=>ids.has(x.id));start(S.mod,order(its),'retry');}
+  else if(a==='nextmod')start(S.mod+1);
+  else if(a==='reset'){PROG={};saveProg();home();}
+});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  if(S.view!=='ex')return;
+  if(S.done){const n=$('#bnext');if(n){e.preventDefault();next();}return;}
+  if(e.target&&e.target.id==='ans'){e.preventDefault();submit();}
+});
+home();
+</script>
+</body>
+</html>
