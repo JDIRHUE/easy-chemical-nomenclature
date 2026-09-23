@@ -1,0 +1,1 @@
+"The objective of this project is to promote the learning of organic and inorganic chemical nomenclature in an entertaining and engaging way, providing simplified notes and a multitude of examples and quizzes."
